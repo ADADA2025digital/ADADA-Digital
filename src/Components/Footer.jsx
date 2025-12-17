@@ -1,4 +1,4 @@
-import React,  { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Logo from "../assets/Images/logo.png";
@@ -22,13 +22,15 @@ const scaleUp = {
   },
 };
 
-const btnRef = useRef(null);
-
-useEffect(() => {
-  if (btnRef.current) Dropdown.getOrCreateInstance(btnRef.current);
-}, []);
-
 const Footer = () => {
+  const btnRef = useRef(null);
+
+  useEffect(() => {
+    if (btnRef.current) {
+      Dropdown.getOrCreateInstance(btnRef.current);
+    }
+  }, []);
+
   return (
     <footer className="container-fluid px-0 text-white p-0 pt-md-5 text-dark footer-background w-100">
       {/* First Row */}
@@ -50,7 +52,6 @@ const Footer = () => {
             whileInView="show"
             viewport={{ once: true, amount: 0.35 }}
           >
-            {" "}
             <div>
               <img
                 src={Logo}
@@ -59,6 +60,7 @@ const Footer = () => {
                 style={{ width: "180px" }}
               />
             </div>
+
             <p className="my-3 heading lh-lg text-justify">
               ADADA Digital is an experienced Creative agency with deep
               experience in direct response website design, application
@@ -66,11 +68,13 @@ const Footer = () => {
               Video, interactive and all digital design as well as UX/UI for all
               devices.
             </p>
+
             <motion.div
               className="social-icons d-flex justify-content-center justify-content-md-start gap-3 my-4"
               variants={scaleUp}
               initial="hidden"
               whileInView="show"
+              viewport={{ once: true, amount: 0.35 }}
             >
               <a
                 href="https://www.facebook.com/adadadigital/"
@@ -81,6 +85,7 @@ const Footer = () => {
               >
                 <i className="bi bi-facebook"></i>
               </a>
+
               <a
                 href="https://www.instagram.com/adadadigital/"
                 className="d-flex justify-content-center align-items-center fs-5 text-white text-decoration-none rounded"
@@ -90,6 +95,7 @@ const Footer = () => {
               >
                 <i className="bi bi-instagram"></i>
               </a>
+
               <a
                 href="https://au.linkedin.com/company/adada-digital"
                 className="d-flex justify-content-center align-items-center fs-5 text-white text-decoration-none rounded"
@@ -111,7 +117,6 @@ const Footer = () => {
             whileInView="show"
             viewport={{ once: true, amount: 0.35 }}
           >
-            {" "}
             <h4 className="my-4 text-white fw-bold">Company</h4>
             <ul className="list-unstyled heading">
               <li className="mb-2">About Us</li>
@@ -131,16 +136,15 @@ const Footer = () => {
             whileInView="show"
             viewport={{ once: true, amount: 0.35 }}
           >
-            {" "}
             <h4 className="my-4 text-white fw-bold">Services</h4>
             <ul className="list-unstyled heading">
-              <li>Website Design & Development</li>
-              <li>UI/UX & Product Design</li>
+              <li>Website Design &amp; Development</li>
+              <li>UI/UX &amp; Product Design</li>
               <li>E-Commerce Development</li>
               <li>Custom Software Development</li>
-              <li>SEO & Digital Marketing</li>
+              <li>SEO &amp; Digital Marketing</li>
               <li>Social Media Marketing</li>
-              <li>Cloud Hosting & DevOps</li>
+              <li>Cloud Hosting &amp; DevOps</li>
             </ul>
           </motion.div>
 
@@ -153,7 +157,6 @@ const Footer = () => {
             whileInView="show"
             viewport={{ once: true, amount: 0.35 }}
           >
-            {" "}
             <h4 className="my-4 text-white fw-bold">Contact</h4>
             <ul className="list-unstyled heading">
               <li className="lh-base mb-3">
@@ -217,16 +220,21 @@ const Footer = () => {
                   type="button"
                   className="btn btn-dark dropdown-toggle p-3 border-0 small text-white"
                   data-bs-toggle="dropdown"
+                  aria-expanded="false"
                 >
                   Australia
                 </button>
 
                 <ul className="dropdown-menu text-center">
                   <li>
-                    <button className="dropdown-item">Australia</button>
+                    <button className="dropdown-item" type="button">
+                      Australia
+                    </button>
                   </li>
                   <li>
-                    <button className="dropdown-item">Sri Lanka</button>
+                    <button className="dropdown-item" type="button">
+                      Sri Lanka
+                    </button>
                   </li>
                 </ul>
               </div>
