@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Logo from "../assets/Images/logo.png";
+import Dropdown from "bootstrap/js/dist/dropdown";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -20,6 +21,12 @@ const scaleUp = {
     transition: { duration: 0.3, ease: "easeOut" },
   },
 };
+
+const btnRef = useRef(null);
+
+useEffect(() => {
+  if (btnRef.current) Dropdown.getOrCreateInstance(btnRef.current);
+}, []);
 
 const Footer = () => {
   return (
@@ -206,27 +213,20 @@ const Footer = () => {
             <div className="col-12 col-md-6 text-center text-md-end mt-4 mt-md-0">
               <div className="dropdown">
                 <button
+                  ref={btnRef}
                   type="button"
                   className="btn btn-dark dropdown-toggle p-3 border-0 small text-white"
                   data-bs-toggle="dropdown"
-                  aria-expanded="false"
                 >
                   Australia
                 </button>
 
-                <ul
-                  className="dropdown-menu text-center"
-                  style={{ zIndex: 1050 }}
-                >
+                <ul className="dropdown-menu text-center">
                   <li>
-                    <button className="dropdown-item" type="button">
-                      Australia
-                    </button>
+                    <button className="dropdown-item">Australia</button>
                   </li>
                   <li>
-                    <button className="dropdown-item" type="button">
-                      Sri Lanka
-                    </button>
+                    <button className="dropdown-item">Sri Lanka</button>
                   </li>
                 </ul>
               </div>
