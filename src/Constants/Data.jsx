@@ -541,7 +541,7 @@ export const Skills = [
   },
   {
     id: 2,
-    imgSrc: AutomationIcon,
+    imgSrc: Excellence,
     title: "Speed without compromising quality",
     description:
       "We follow optimized workflows and agile development, ensuring your website, app, or digital product is delivered on time with flawless performance.",
@@ -657,8 +657,8 @@ export const servicesData = [
     title: "E-Commerce Development",
     description:
       "We build secure, scalable e-commerce websites optimized for conversions and online sales growth. Services include custom online stores, product and inventory systems, secure payment gateway integration, subscription models, and automated shipping and tax workflows.",
-        extraImages: [Adroit],
-      expanded: {
+    extraImages: [Adroit],
+    expanded: {
       title: "What you get",
       text: "A conversion-optimized online store with secure payments, smooth checkout, and automation to scale your e-commerce operations.",
       points: [

@@ -104,7 +104,9 @@ const About = () => {
   return (
     <>
       <Helmet>
-        <title>About Us - ADADA Digital | Web Development & Digital Agency Services</title>
+        <title>
+          About Us - ADADA Digital | Web Development & Digital Agency Services
+        </title>
 
         <meta
           name="description"
@@ -229,10 +231,10 @@ const About = () => {
         <div className="container">
           <motion.div
             className="row my-md-5 my-0 py-5 d-flex align-items-center justify-content-center"
-            style={{
-              background:
-                "url(../Images/Grid.png) no-repeat center center/cover",
-            }}
+            // style={{
+            //   background:
+            //     "url(../Images/Grid.png) no-repeat center center/cover",
+            // }}
             variants={sectionReveal}
             initial="hidden"
             whileInView="show"

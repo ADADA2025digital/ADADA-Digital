@@ -34,7 +34,8 @@ body {
 }
 
 .custom-card {
-  background: linear-gradient(
+  background:
+    linear-gradient(
       0deg,
       rgb(237 56 76 / 56%) -76.78%,
       rgba(0, 0, 0, 0.3) 38.44%
@@ -165,7 +166,9 @@ body {
 
 .logo-img {
   height: 60px;
-  transition: height 600ms ease, transform 600ms ease;
+  transition:
+    height 600ms ease,
+    transform 600ms ease;
   will-change: height, transform;
 }
 
@@ -247,7 +250,8 @@ footer .dropdown-menu {
 /* Home */
 /* Hero section */
 .hero-section {
-  background-image: url("../Images/header.svg"),
+  background-image:
+    url("../Images/header.svg"),
     linear-gradient(205deg, #0b0b0b34 41%, #da494414 150%) !important;
   background-size: cover;
   background-position: center;
@@ -569,7 +573,8 @@ footer .dropdown-menu {
 }
 
 .card-front {
-  background: linear-gradient(
+  background:
+    linear-gradient(
       0deg,
       rgb(237 56 76 / 56%) -76.78%,
       rgba(0, 0, 0, 0.3) 38.44%
@@ -639,7 +644,9 @@ footer .dropdown-menu {
 .portfolio-description {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
   line-height: 1.5;
 }
 
@@ -724,13 +731,16 @@ footer .dropdown-menu {
 /* About Page*/
 /* Hero section */
 .about-us {
-  background: url("../Images/Grid.png"),
+  background:
+    url("../Images/hero-bg.png"),
     radial-gradient(
       circle,
-      rgba(244, 131, 52, 0.15) 30%,
-      rgba(237, 56, 76, 0.1) 60%,
+      rgba(0, 0, 0, 0.15) 30%,
+      rgba(0, 0, 0, 0.1) 60%,
       rgba(17, 18, 23, 0.05) 100%
     );
+  background-size: cover;
+  background-position: center;
 }
 
 .gallery-image {
@@ -786,7 +796,9 @@ footer .dropdown-menu {
     rgba(24, 24, 24, 0.8),
     rgba(12, 12, 12, 1)
   );
-  box-shadow: 0 0 0 2px #161616, 0 0px 1px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 0 0 2px #161616,
+    0 0px 1px rgba(0, 0, 0, 0.1);
 }
 
 .form-container .form-control {
@@ -845,12 +857,31 @@ footer .dropdown-menu {
   height: 2px;
   border-radius: 50%;
   opacity: 1;
-  box-shadow: 140px 20px #fff, 425px 20px #fff, 70px 120px #fff, 20px 130px #fff,
-    110px 80px #fff, 280px 80px #fff, 250px 350px #fff, 280px 230px #fff,
-    220px 190px #fff, 450px 100px #fff, 380px 80px #fff, 520px 50px #fff,
-    520px 190px #fff, 650px 100px #fff, 780px 80px #fff, 820px 50px #fff,
-    920px 190px #fff, 950px 100px #fff, 1080px 80px #fff, 1120px 50px #fff,
-    620px 190px #fff, 650px 100px #fff, 680px 50px #fff, 920px 50px #fff;
+  box-shadow:
+    140px 20px #fff,
+    425px 20px #fff,
+    70px 120px #fff,
+    20px 130px #fff,
+    110px 80px #fff,
+    280px 80px #fff,
+    250px 350px #fff,
+    280px 230px #fff,
+    220px 190px #fff,
+    450px 100px #fff,
+    380px 80px #fff,
+    520px 50px #fff,
+    520px 190px #fff,
+    650px 100px #fff,
+    780px 80px #fff,
+    820px 50px #fff,
+    920px 190px #fff,
+    950px 100px #fff,
+    1080px 80px #fff,
+    1120px 50px #fff,
+    620px 190px #fff,
+    650px 100px #fff,
+    680px 50px #fff,
+    920px 50px #fff;
   z-index: -1;
   transition: 1.5s ease;
   animation: 1s glowing-stars linear alternate infinite;
@@ -865,14 +896,37 @@ footer .dropdown-menu {
   height: 2px;
   border-radius: 50%;
   opacity: 1;
-  box-shadow: 490px 330px #fff, 420px 300px #fff, 320px 280px #fff,
-    380px 350px #fff, 546px 170px #fff, 420px 180px #fff, 370px 150px #fff,
-    200px 250px #fff, 80px 20px #fff, 190px 50px #fff, 270px 20px #fff,
-    120px 230px #fff, 350px -1px #fff, 150px 369px #fff, 200px 120px #fff,
-    40px 450px #fff, 80px 420px #fff, 190px 500px #fff, 270px 520px #fff,
-    20px 530px #fff, 80px 550px #fff, 120px 500px #fff, 200px 420px #fff,
-    200px 580px #fff, 300px 420px #fff, 350px 480px #fff, 400px 400px #fff,
-    450px 520px #fff, 380px 580px #fff, 460px 560px #fff;
+  box-shadow:
+    490px 330px #fff,
+    420px 300px #fff,
+    320px 280px #fff,
+    380px 350px #fff,
+    546px 170px #fff,
+    420px 180px #fff,
+    370px 150px #fff,
+    200px 250px #fff,
+    80px 20px #fff,
+    190px 50px #fff,
+    270px 20px #fff,
+    120px 230px #fff,
+    350px -1px #fff,
+    150px 369px #fff,
+    200px 120px #fff,
+    40px 450px #fff,
+    80px 420px #fff,
+    190px 500px #fff,
+    270px 520px #fff,
+    20px 530px #fff,
+    80px 550px #fff,
+    120px 500px #fff,
+    200px 420px #fff,
+    200px 580px #fff,
+    300px 420px #fff,
+    350px 480px #fff,
+    400px 400px #fff,
+    450px 520px #fff,
+    380px 580px #fff,
+    460px 560px #fff;
   z-index: -1;
   transition: 2s ease;
   animation: 1s glowing-stars linear alternate infinite;
@@ -901,9 +955,18 @@ footer .dropdown-menu {
   height: 2px;
   border-radius: 50%;
   opacity: 1;
-  box-shadow: 820px 118px #fff, 880px 176px #fff, 920px 250px #fff,
-    860px 280px #fff, 820px 330px #fff, 620px 370px #fff, 680px 476px #fff,
-    530px 450px #fff, 520px 250px #fff, 400px 220px #fff, 50px 350px #fff,
+  box-shadow:
+    820px 118px #fff,
+    880px 176px #fff,
+    920px 250px #fff,
+    860px 280px #fff,
+    820px 330px #fff,
+    620px 370px #fff,
+    680px 476px #fff,
+    530px 450px #fff,
+    520px 250px #fff,
+    400px 220px #fff,
+    50px 350px #fff,
     10px 230px #fff;
   z-index: -1;
   transition: 1s ease;
@@ -928,14 +991,18 @@ footer .dropdown-menu {
   outline: none;
   border-radius: 50%;
   background: rgba(242, 112, 51, 0.3);
-  box-shadow: 0px 0px 800px rgba(243, 112, 51, 0.9),
-    0px 0px 800px rgba(243, 112, 51, 0.7), inset #f37032 0px 0px 40px -12px;
+  box-shadow:
+    0px 0px 800px rgba(243, 112, 51, 0.9),
+    0px 0px 800px rgba(243, 112, 51, 0.7),
+    inset #f37032 0px 0px 40px -12px;
   transition: 0.4s ease-in-out;
   z-index: -1;
 }
 .quote:hover .quote-border::after {
-  box-shadow: 0px 0px 800px rgba(243, 112, 51, 1),
-    0px 0px 800px rgba(243, 112, 51, 1), inset #f37032 0px 0px 40px -12px;
+  box-shadow:
+    0px 0px 800px rgba(243, 112, 51, 1),
+    0px 0px 800px rgba(243, 112, 51, 1),
+    inset #f37032 0px 0px 40px -12px;
 }
 
 @keyframes shootingStar {
