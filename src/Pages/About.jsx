@@ -15,9 +15,9 @@ import TeamSlider from "../Components/Team";
 
 import Logo from "../assets/Images/logo.png";
 import Infomodel from "../assets/Images/13.png";
-import Teamworking from "../assets/Images/2.png";
-import Collaboration from "../assets/Images/3.png";
-import Teamdiscussion from "../assets/Images/4.png";
+import Teamworking from "../assets/Images/2.jpg";
+import Collaboration from "../assets/Images/3.jpg";
+import Teamdiscussion from "../assets/Images/4.jpg";
 
 const sectionReveal = {
   hidden: { opacity: 0, y: 16 },
