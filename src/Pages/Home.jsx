@@ -396,7 +396,7 @@ function Home() {
 
           {/* social rail */}
           <motion.div
-            className="social-container d-none d-md-block flex-column align-items-center position-absolute z-2"
+            className="social-container d-none d-md-block flex-column align-items-end justify-content-end position-absolute top-50 translate-middle-y z-2"
             initial={{ opacity: 0, x: -16 }}
             whileInView={{ opacity: 1, x: 0, transition: { duration: 0.45 } }}
             viewport={{ once: true, amount: 0.3 }}
