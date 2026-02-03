@@ -311,14 +311,14 @@ export const portfolioData = [
     description:
       "A comprehensive digital platform featuring a dynamic website and a content management system to efficiently manage website content and social media communication. The solution enhanced the Centre’s digital presence and strengthened engagement with the devotee community through structured and timely updates.",
   },
-  {
-    id: 4,
-    image: Adroit,
-    title: "Adroit Ecom",
-    subheading: "Business Website & Electronics Selling Platform",
-    description:
-      "A modern business website combined with an electronics selling platform featuring secure PayPal payment integration. The system includes real-time product and order updates, instant dashboard notifications, and a streamlined interface for showcasing products and managing customer transactions efficiently.",
-  },
+  // {
+  //   id: 4,
+  //   image: Adroit,
+  //   title: "Adroit Ecom",
+  //   subheading: "Business Website & Electronics Selling Platform",
+  //   description:
+  //     "A modern business website combined with an electronics selling platform featuring secure PayPal payment integration. The system includes real-time product and order updates, instant dashboard notifications, and a streamlined interface for showcasing products and managing customer transactions efficiently.",
+  // },
   {
     id: 5,
     image: Urban,
@@ -330,7 +330,7 @@ export const portfolioData = [
   {
     id: 6,
     image: Portfolio1,
-    title: "Patru Seedu System",
+    title: "Patru Cheetu System",
     subheading: "System",
     description:
       "A robust temple management system for Hindu temples in Sydney, covering pooja booking, donation tracking, and event management across multiple temples.",
@@ -343,22 +343,22 @@ export const portfolioData = [
     description:
       "A fully customized Shopify e-commerce platform designed for St Louis, featuring category-based product purchase in a single payment flow, specialized SEO integration, advanced product stock management, and seamless order processing for smooth business operations.",
   },
-  {
-    id: 8,
-    image: AdadaChai,
-    title: "Chai ADADA",
-    subheading: "E-Commerce Website",
-    description:
-      "An e-commerce platform designed for renting and selling tea vending machines and tea powders, featuring a powerful dashboard for product and order management, instant notifications, seamless stock control, and secure online payment integration for smooth business operations.",
-  },
-  {
-    id: 9,
-    image: Adadare,
-    title: "ADADA Re",
-    subheading: "Real Estate Website",
-    description:
-      "A real estate website featuring property listings, detailed property pages, and agent profile management. The platform enables direct communication with agents and includes an admin panel for property management, agent assignment, and efficient operational control.",
-  },
+  // {
+  //   id: 8,
+  //   image: AdadaChai,
+  //   title: "Chai ADADA",
+  //   subheading: "E-Commerce Website",
+  //   description:
+  //     "An e-commerce platform designed for renting and selling tea vending machines and tea powders, featuring a powerful dashboard for product and order management, instant notifications, seamless stock control, and secure online payment integration for smooth business operations.",
+  // },
+  // {
+  //   id: 9,
+  //   image: Adadare,
+  //   title: "ADADA Re",
+  //   subheading: "Real Estate Website",
+  //   description:
+  //     "A real estate website featuring property listings, detailed property pages, and agent profile management. The platform enables direct communication with agents and includes an admin panel for property management, agent assignment, and efficient operational control.",
+  // },
   {
     id: 10,
     image: Atta,
@@ -383,22 +383,22 @@ export const portfolioData = [
     description:
       "A modern and user-friendly hotel website showcasing rooms, amenities, dining options, and scenic experiences at Green View Peak. The platform helps guests explore the property, view packages, and make informed booking decisions with ease.",
   },
-  {
-    id: 13,
-    image: Portfolio1,
-    title: "Paradise Found Sri Lanka",
-    subheading: "Website",
-    description:
-      "A tourism management website showcasing attractive tour packages, travel destinations, and activities across Sri Lanka for both local and international travelers.",
-  },
-  {
-    id: 14,
-    image: Maxfit,
-    title: "Maxfit Physiotherapy",
-    subheading: "Website",
-    description:
-      "A professional website showcasing Maxfit Physiotherapy’s services, highlighting AHPRA-registered expertise, NDIS accreditation, and a patient-focused approach. The platform presents comprehensive physiotherapy programs, assessments, and treatment goals while emphasizing trust, quality care, and community support.",
-  },
+  // {
+  //   id: 13,
+  //   image: Portfolio1,
+  //   title: "Paradise Found Sri Lanka",
+  //   subheading: "Website",
+  //   description:
+  //     "A tourism management website showcasing attractive tour packages, travel destinations, and activities across Sri Lanka for both local and international travelers.",
+  // },
+  // {
+  //   id: 14,
+  //   image: Maxfit,
+  //   title: "Maxfit Physiotherapy",
+  //   subheading: "Website",
+  //   description:
+  //     "A professional website showcasing Maxfit Physiotherapy’s services, highlighting AHPRA-registered expertise, NDIS accreditation, and a patient-focused approach. The platform presents comprehensive physiotherapy programs, assessments, and treatment goals while emphasizing trust, quality care, and community support.",
+  // },
   {
     id: 15,
     image: MsCleaning,
@@ -444,24 +444,24 @@ export const howitworksData = [
 export const statsData = [
   {
     id: 1,
-    title: "50+",
+    title: "30+",
     heading: "Completed Projects",
     description:
-      "Successfully delivered 50+ digital projects across web, mobile, software, and cloud platforms for diverse industries.",
+      "Successfully delivered 30+ digital projects across web, mobile, software, and cloud platforms for diverse industries.",
   },
   {
     id: 2,
-    title: "45+",
+    title: "25+",
     heading: "Happy Clients",
     description:
-      "Trusted by 45+ satisfied clients worldwide, building strong long-term partnerships through quality and innovation.",
+      "Trusted by 25+ satisfied clients worldwide, building strong long-term partnerships through quality and innovation.",
   },
   {
     id: 3,
-    title: "20+",
+    title: "10+",
     heading: "Products Released",
     description:
-      "Launched 20+ digital products including platforms, dashboards, and automation solutions with real-world impact.",
+      "Launched 10+ digital products including platforms, dashboards, and automation solutions with real-world impact.",
   },
 ];
 
@@ -494,19 +494,19 @@ export const data1 = [
     number: "50+",
     title: "Successful Projects Completed",
     description:
-      "Successfully delivered 50+ digital projects across web, mobile, software, and cloud platforms for diverse industries.",
+      "Successfully delivered digital projects across web, mobile, software, and cloud platforms for diverse industries.",
   },
   {
     number: "45+",
     title: "Satisfied Clients Globally",
     description:
-      "Trusted by 45+ satisfied clients worldwide, building strong long-term partnerships through quality and innovation.",
+      "Trusted by satisfied clients worldwide, building strong long-term partnerships through quality and innovation.",
   },
   {
     number: "20+",
     title: "Products Released",
     description:
-      "Launched 20+ digital products including platforms, dashboards, and automation solutions with real-world impact.",
+      "Launched digital products including platforms, dashboards, and automation solutions with real-world impact.",
   },
 ];
 
@@ -515,19 +515,19 @@ export const data2 = [
     number: "5+",
     title: "POS Systems Delivered",
     description:
-      "Successfully built and deployed 5+ custom POS systems tailored to diverse business operations.",
+      "Successfully built and deployed custom POS systems tailored to diverse business operations.",
   },
   {
     number: "10+",
     title: "CMS Platforms Developed",
     description:
-      "Designed and developed 10+ powerful CMS platforms enabling seamless content and user management.",
+      "Designed and developed powerful CMS platforms enabling seamless content and user management.",
   },
   {
     number: "10+",
     title: "Websites Launched",
     description:
-      "Created and launched 10+ modern, high-performance websites for businesses across industries.",
+      "Created and launched modern, high-performance websites for businesses across industries.",
   },
 ];
 
@@ -639,7 +639,7 @@ export const servicesData = [
     title: "Website Design & Development",
     description:
       "We design high-performance, SEO-friendly, and conversion-focused websites tailored to your business goals. Our solutions include responsive UI/UX, full-stack development, secure backends, API integration, CMS platforms, and optimized web applications for speed and search visibility.",
-    extraImages: [heading1, heading2, heading3],
+    extraImages: [RosewoodGarden, LSB, Maxfit],
     expanded: {
       title: "What you get",
       text: "A fast, scalable, and mobile-first website engineered for better rankings, stronger engagement, and higher conversions.",
@@ -657,7 +657,8 @@ export const servicesData = [
     title: "E-Commerce Development",
     description:
       "We build secure, scalable e-commerce websites optimized for conversions and online sales growth. Services include custom online stores, product and inventory systems, secure payment gateway integration, subscription models, and automated shipping and tax workflows.",
-    expanded: {
+        extraImages: [Adroit],
+      expanded: {
       title: "What you get",
       text: "A conversion-optimized online store with secure payments, smooth checkout, and automation to scale your e-commerce operations.",
       points: [
@@ -674,7 +675,7 @@ export const servicesData = [
     title: "Mobile App Development",
     description:
       "We develop fast, secure, and scalable mobile apps for Android, iOS, and cross-platform delivery using Flutter and React Native. Our services include UI/UX design, API integration, push notifications, in-app payments, analytics, and app store deployment.",
-    extraImages: [heading1, heading2, heading3],
+    // extraImages: [heading1, heading2, heading3],
     expanded: {
       title: "What you get",
       text: "A modern mobile app built for performance, user retention, and smooth publishing across Android and iOS platforms.",
@@ -692,7 +693,7 @@ export const servicesData = [
     title: "CMS & Custom Portal Development",
     description:
       "We create secure enterprise CMS platforms and custom portals to manage workflows, users, and operations. Solutions include WordPress or headless CMS, CRM/ERP/LMS systems, booking portals, dashboards, admin panels, and role-based access control.",
-    extraImages: [heading1, heading2, heading3],
+    extraImages: [WSTSC, Atta],
     expanded: {
       title: "What you get",
       text: "A robust CMS or portal that centralizes operations, improves efficiency, and enables role-based management at scale.",
@@ -710,7 +711,6 @@ export const servicesData = [
     title: "SEO & Digital Marketing",
     description:
       "We increase search rankings, traffic, and lead generation with a complete SEO and digital marketing strategy. Services include keyword research, on-page SEO, technical SEO, content marketing, Google Ads, social media campaigns, conversion rate optimization, and analytics tracking.",
-    extraImages: [heading1, heading2, heading3],
     expanded: {
       title: "What you get",
       text: "A data-driven growth system to improve rankings, drive qualified traffic, and generate consistent leads.",
@@ -728,7 +728,7 @@ export const servicesData = [
     title: "Branding & Creative Design",
     description:
       "We build premium brand identities that improve trust and recognition. Our services include logo design, brand style guides, social media creatives, brochures, posters, pitch decks, and marketing assets aligned with your brand voice and visual standards.",
-    extraImages: [heading1, heading2, heading3],
+    extraImages: [Urban],
     expanded: {
       title: "What you get",
       text: "A consistent brand identity system that strengthens credibility and improves marketing performance across all channels.",
@@ -746,7 +746,7 @@ export const servicesData = [
     title: "UI/UX & Product Design",
     description:
       "We design intuitive and conversion-focused user experiences for SaaS products, dashboards, mobile apps, and enterprise systems. Our process includes UX research, user flows, wireframes, prototypes, design systems, accessibility standards, and usability audits.",
-    extraImages: [heading1, heading2, heading3],
+    extraImages: [MsCleaning, heading2, heading3],
     expanded: {
       title: "What you get",
       text: "A modern user experience designed to boost engagement, reduce drop-offs, and increase conversions.",
@@ -764,7 +764,7 @@ export const servicesData = [
     title: "Cloud, Hosting & DevOps",
     description:
       "We deliver reliable cloud infrastructure and DevOps automation for secure deployments and high availability. Services include AWS/Azure/GCP setup, CI/CD pipelines, Docker containerization, server optimization, monitoring, backups, disaster recovery, and scalability planning.",
-    extraImages: [heading1, heading2, heading3],
+    // extraImages: [heading1, heading2, heading3],
     expanded: {
       title: "What you get",
       text: "A secure, scalable cloud setup with automated deployments and monitoring for stable, high-performance operations.",
@@ -782,7 +782,7 @@ export const servicesData = [
     title: "Website Maintenance & Support",
     description:
       "We provide ongoing website maintenance to keep your platform secure, fast, and always updated. Services include security patching, bug fixes, performance tuning, uptime monitoring, backups, content updates, and feature enhancements through structured support plans.",
-    extraImages: [heading1, heading2, heading3],
+    // extraImages: [heading1, heading2, heading3],
     expanded: {
       title: "What you get",
       text: "Reliable long-term support to protect your website, improve performance, and keep everything running smoothly.",
@@ -800,7 +800,7 @@ export const servicesData = [
     title: "Business Automation & Custom Software",
     description:
       "We build custom software solutions that automate business operations and reduce manual work. Systems include CRM, HRMS, payroll, billing, accounting, inventory, project tracking, construction workflows, approvals, and dashboards with scalable architecture.",
-    extraImages: [heading1, heading2, heading3],
+    extraImages: [WSTSC],
     expanded: {
       title: "What you get",
       text: "A custom business system that streamlines workflows, improves productivity, and gives real-time operational control.",
@@ -818,7 +818,7 @@ export const servicesData = [
     title: "Data, Analytics & AI Solutions",
     description:
       "We deliver data and AI solutions that improve decision-making and operational efficiency. Services include BI dashboards, analytics reporting, predictive insights, AI chatbots, OCR automation, machine learning integration, and data visualization for actionable intelligence.",
-    extraImages: [heading1, heading2, heading3],
+    // extraImages: [heading1, heading2, heading3],
     expanded: {
       title: "What you get",
       text: "A practical analytics and AI layer that turns raw data into insights, automation, and smarter customer experiences.",
@@ -836,7 +836,7 @@ export const servicesData = [
     title: "Cybersecurity & Compliance",
     description:
       "We protect websites and applications with enterprise-grade cybersecurity. Our services include security audits, penetration testing, vulnerability assessments, secure authentication, encryption, access control, and compliance readiness for GDPR/ISO/SOC standards.",
-    extraImages: [heading1, heading2, heading3],
+    // extraImages: [heading1, heading2, heading3],
     expanded: {
       title: "What you get",
       text: "A hardened security framework to reduce risk, protect data, and strengthen compliance posture.",
@@ -854,7 +854,7 @@ export const servicesData = [
     title: "Digital & IT Consultancy",
     description:
       "We support organizations with strategic IT consulting for modernization and sustainable growth. Services include digital transformation planning, cloud adoption strategy, automation roadmaps, MVP planning, system architecture, and technology stack selection for scalability.",
-    extraImages: [heading1, heading2, heading3],
+    // extraImages: [heading1, heading2, heading3],
     expanded: {
       title: "What you get",
       text: "Clear technology direction and execution planning to reduce risk and accelerate digital transformation.",
@@ -872,7 +872,7 @@ export const servicesData = [
     title: "Emerging Technology Solutions",
     description:
       "We build next-generation digital solutions using blockchain, Web3, AR/VR, metaverse environments, and IoT platforms. These solutions help organizations innovate, enhance user experiences, and adopt future-ready digital ecosystems.",
-    extraImages: [heading1, heading2, heading3],
+    // extraImages: [heading1, heading2, heading3],
     expanded: {
       title: "What you get",
       text: "Innovation-ready solutions designed to explore new digital models and next-generation customer experiences.",
@@ -890,7 +890,7 @@ export const servicesData = [
     title: "Training & Technical Enablement",
     description:
       "We provide structured training and enablement programs for teams and individuals. Topics include web development, UI/UX, SEO and digital marketing, CMS management, cloud fundamentals, corporate workshops, and job-ready internship training programs.",
-    extraImages: [heading1, heading2, heading3],
+    // extraImages: [heading1, heading2, heading3],
     expanded: {
       title: "What you get",
       text: "Practical training that improves team capability, standardizes delivery, and builds long-term internal expertise.",
@@ -908,7 +908,7 @@ export const servicesData = [
     title: "Value-Added Digital Services",
     description:
       "We provide value-added services to support global expansion and enterprise readiness. This includes multilingual websites, accessibility compliance (WCAG), international SEO, white-label software development, payment reconciliation tools, and government-ready digital platforms.",
-    extraImages: [heading1, heading2, heading3],
+    // extraImages: [heading1, heading2, heading3],
     expanded: {
       title: "What you get",
       text: "Additional capabilities that improve global reach, accessibility, compliance, and platform scalability.",
@@ -934,8 +934,8 @@ export const contactData = [
     id: 2,
     imgSrc: Email,
     title: "Email Address",
-    description: "info@adadadigital.com.au",
-    link: "mailto:info@adadadigital.com.au",
+    description: "info@adada.com.au",
+    link: "mailto:info@adada.com.au",
   },
   {
     id: 3,

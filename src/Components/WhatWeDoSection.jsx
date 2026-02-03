@@ -114,12 +114,12 @@ const WhatWeDoSection = () => {
               >
                 <motion.div
                   className="purpose-card card border-0 shadow bg-transparent text-white w-100"
-                  whileHover={{
-                    y: -6,
-                    scale: 1.02,
-                    rotateX: 1.5,
-                    rotateY: -1.5,
-                  }}
+                  // whileHover={{
+                  //   y: -6,
+                  //   scale: 1.02,
+                  //   rotateX: 1.5,
+                  //   rotateY: -1.5,
+                  // }}
                   whileTap={{ scale: 0.99 }}
                   transition={{
                     type: "spring",

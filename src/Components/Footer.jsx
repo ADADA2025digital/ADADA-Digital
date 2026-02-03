@@ -188,7 +188,6 @@ const Footer = () => {
                 <br /> NSW, Sydney, Au
               </li>
 
-              <li>Security</li>
             </ul>
           </motion.div>
         </div>

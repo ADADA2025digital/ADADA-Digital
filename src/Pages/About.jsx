@@ -626,7 +626,7 @@ const About = () => {
         </div>
       </section>
 
-      <TeamSlider />
+      {/* <TeamSlider /> */}
 
       {/* Subscription Section */}
       <SubscribeSection />

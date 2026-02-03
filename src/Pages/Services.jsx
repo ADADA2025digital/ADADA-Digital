@@ -236,16 +236,14 @@ const Services = () => {
                     >
                       {/* Image (optional) */}
                       {card.extraImages?.length > 0 && (
-                        <div className="col-12 col-md-4 text-center mb-3 mb-md-0">
+                        <div className="col-12 col-md-4 text-center mb-3 mb-md-0 d-flex align-item-end justify-content-end">
+                          <div className="rounded-5" style={{height: '250px', width: '300px'}}>
                           <img
                             src={card.extraImages[0]}
                             alt="extra"
-                            style={{
-                              width: "100%",
-                              height: "auto",
-                              borderRadius: "8px",
-                            }}
+                            className="w-100 h-100 rounded-4"
                           />
+                          </div>
                         </div>
                       )}
 
