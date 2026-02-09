@@ -6,6 +6,7 @@ import { Offcanvas } from "bootstrap";
 import ButtonGlobal from "./Button";
 import Logo from "../assets/Images/logo.png";
 import Logosm from "../assets/Images/fav.svg";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
   const location = useLocation();
@@ -65,9 +66,230 @@ const Header = () => {
     offcanvasInstance.hide();
   };
 
+  // Form handlers
+  const formRef = useRef();
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    mobile: "",
+    email: "",
+    message: "",
+    type: "quote",
+    submitted_at: "",
+    subject: "Quick Quote Request from Website"
+  });
+  const [errors, setErrors] = useState({});
+  const [generalError, setGeneralError] = useState("");
+  const [showCaptcha, setShowCaptcha] = useState(false);
+  const [captchaValue, setCaptchaValue] = useState("");
+  const [captchaError, setCaptchaError] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    
+    const updatedFormData = { ...formData, [name]: value };
+    setFormData(updatedFormData);
+
+    // Clear specific error when user types
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: "" });
+    }
+    
+    // Clear general error when any field changes
+    if (generalError) {
+      setGeneralError("");
+    }
+    
+    // Clear captcha error when user types in message
+    if (name === "message" && captchaError) {
+      setCaptchaError("");
+    }
+    
+    // If form has been submitted, validate this field immediately
+    if (isSubmitted) {
+      const validationErrors = validate();
+      setErrors(validationErrors);
+    }
+
+    if (name === "message") {
+      setShowCaptcha(value.trim().length > 0);
+    }
+  };
+
+  const handleCaptchaChange = (value) => {
+    setCaptchaValue(value);
+    setCaptchaError("");
+  };
+
+  const validate = () => {
+    const newErrors = {};
+
+    // First Name validation
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = "First name is required";
+    } else if (!/^[a-zA-Z\s]+$/.test(formData.firstName.trim())) {
+      newErrors.firstName =
+        "First name should not contain numbers or special characters";
+    }
+
+    // Mobile Number validation
+    if (!formData.mobile.trim()) {
+      newErrors.mobile = "Mobile number is required";
+    } else if (!/^\d{10}$/.test(formData.mobile.trim())) {
+      newErrors.mobile = "Enter a valid 10-digit mobile number";
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+        formData.email.trim()
+      )
+    ) {
+      newErrors.email = "Enter a valid email address";
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Message should be at least 10 characters long";
+    }
+
+    return newErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+    setIsSubmitting(true);
+    setSent(false);
+
+    // Prepare date for submission
+    const currentDate = new Date().toLocaleDateString('en-AU', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+
+    // Update form data with current date
+    const formDataWithDate = {
+      ...formData,
+      submitted_at: currentDate
+    };
+
+    // First, validate all fields
+    const validationErrors = validate();
+
+    // Check if message has content (for captcha)
+    const shouldCheckCaptcha = formData.message.trim().length > 0;
+    const isCaptchaInvalid = shouldCheckCaptcha && !captchaValue;
+
+    // Set captcha error if needed
+    if (isCaptchaInvalid) {
+      setCaptchaError("Please complete the reCAPTCHA.");
+    } else {
+      setCaptchaError("");
+    }
+
+    // Check if there are validation errors OR captcha is invalid
+    if (Object.keys(validationErrors).length > 0 || isCaptchaInvalid) {
+      setErrors(validationErrors);
+      setIsSubmitting(false);
+
+      // Check if any required fields are empty
+      const requiredFields = [
+        "firstName",
+        "mobile",
+        "email",
+        "message",
+      ];
+      const hasEmptyRequiredFields = requiredFields.some(
+        (field) => !formData[field].trim()
+      );
+
+      // Show general error if there are empty required fields or captcha is invalid
+      if (hasEmptyRequiredFields || isCaptchaInvalid) {
+        setGeneralError("Please fill in all the required fields correctly.");
+      } else {
+        setGeneralError("Please correct the errors in the form.");
+      }
+
+      return;
+    }
+
+    // Clear any previous errors
+    setErrors({});
+    setGeneralError("");
+
+    // Prepare template parameters
+    const templateParams = {
+      firstName: formData.firstName,
+      lastName: formData.lastName || "", // Optional field
+      mobile: formData.mobile,
+      email: formData.email,
+      message: formData.message,
+      type: "quote",
+      submitted_at: currentDate,
+      subject: "Quick Quote Request from Website"
+    };
+
+    // If all validations pass
+    emailjs
+      .send(
+        "service_k2vg37v",
+        "template_zyksz58",
+        templateParams,
+        "nysf1_-cRk-gUnJ2L",
+      )
+      .then(
+        (response) => {
+          console.log("Email sent successfully:", response);
+          setIsSubmitting(false);
+          setSent(true);
+          
+          // Clear the form after successful submission
+          setFormData({
+            firstName: "",
+            lastName: "",
+            mobile: "",
+            email: "",
+            message: "",
+            type: "quote",
+            submitted_at: "",
+            subject: "Quick Quote Request from Website"
+          });
+          
+          // Reset form state
+          setErrors({});
+          setCaptchaValue("");
+          setShowCaptcha(false);
+          setIsSubmitted(false);
+          
+          // Auto close modal after 3 seconds
+          setTimeout(() => {
+            onClose();
+          }, 3000);
+        },
+        (error) => {
+          console.error("Email send error:", error.text);
+          setIsSubmitting(false);
+          setGeneralError(
+            "There was a problem sending the email. Please try again."
+          );
+        }
+      );
+  };
+
   // Modal handlers
   const onClose = () => {
     setShowModal(false);
+    setSent(false);
+    setIsSubmitting(false);
 
     // cleanup any stuck bootstrap backdrops
     document
@@ -78,11 +300,14 @@ const Header = () => {
     document.body.style.overflow = "auto";
 
     setFormData({
-      fullName: "",
-      mobileNumber: "",
+      firstName: "",
+      lastName: "",
+      mobile: "",
       email: "",
-      company: "",
       message: "",
+      type: "quote",
+      submitted_at: "",
+      subject: "Quick Quote Request from Website"
     });
     setErrors({});
     setGeneralError("");
@@ -106,174 +331,6 @@ const Header = () => {
       document.body.style.overflow = "auto";
     };
   }, [showModal]);
-
-  // Form handlers
-  const formRef = useRef();
-  const [formData, setFormData] = useState({
-    fullName: "",
-    mobileNumber: "",
-    email: "",
-    company: "",
-    message: "",
-  });
-  const [errors, setErrors] = useState({});
-  const [generalError, setGeneralError] = useState("");
-  const [showCaptcha, setShowCaptcha] = useState(false);
-  const [captchaValue, setCaptchaValue] = useState("");
-  const [captchaError, setCaptchaError] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    const updatedFormData = { ...formData, [name]: value };
-
-    setFormData(updatedFormData);
-
-    // Clear specific error when user types
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: "" });
-    }
-
-    // Clear general error when any field changes
-    if (generalError) {
-      setGeneralError("");
-    }
-
-    // Clear captcha error when user types in message
-    if (name === "message" && captchaError) {
-      setCaptchaError("");
-    }
-
-    // If form has been submitted, validate this field immediately
-    if (isSubmitted) {
-      const validationErrors = validate();
-      setErrors(validationErrors);
-    }
-
-    if (name === "message") {
-      setShowCaptcha(value.trim().length > 0);
-    }
-  };
-
-  const handleCaptchaChange = (value) => {
-    setCaptchaValue(value);
-    setCaptchaError("");
-  };
-
-  const validate = () => {
-    const newErrors = {};
-
-    // Full Name validation
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = "Full name is required";
-    } else if (!/^[a-zA-Z\s]+$/.test(formData.fullName.trim())) {
-      newErrors.fullName =
-        "Full name should not contain numbers or special characters";
-    }
-
-    // Mobile Number validation
-    if (!formData.mobileNumber.trim()) {
-      newErrors.mobileNumber = "Mobile number is required";
-    } else if (!/^\d{10}$/.test(formData.mobileNumber.trim())) {
-      newErrors.mobileNumber = "Enter a valid 10-digit mobile number";
-    }
-
-    // Email validation
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (
-      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-        formData.email.trim()
-      )
-    ) {
-      newErrors.email = "Enter a valid email address";
-    }
-
-    // Company validation
-    if (!formData.company.trim()) {
-      newErrors.company = "Company name is required";
-    }
-
-    // Message validation
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = "Message should be at least 10 characters long";
-    }
-
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-
-    // First, validate all fields
-    const validationErrors = validate();
-
-    // Check if message has content (for captcha)
-    const shouldCheckCaptcha = formData.message.trim().length > 0;
-    const isCaptchaInvalid = shouldCheckCaptcha && !captchaValue;
-
-    // Set captcha error if needed
-    if (isCaptchaInvalid) {
-      setCaptchaError("Please complete the reCAPTCHA.");
-    } else {
-      setCaptchaError("");
-    }
-
-    // Check if there are validation errors OR captcha is invalid
-    if (Object.keys(validationErrors).length > 0 || isCaptchaInvalid) {
-      setErrors(validationErrors);
-
-      // Check if any required fields are empty
-      const requiredFields = [
-        "fullName",
-        "mobileNumber",
-        "email",
-        "company",
-        "message",
-      ];
-      const hasEmptyRequiredFields = requiredFields.some(
-        (field) => !formData[field].trim()
-      );
-
-      // Show general error if there are empty required fields or captcha is invalid
-      if (hasEmptyRequiredFields || isCaptchaInvalid) {
-        setGeneralError("Please fill in all the required fields correctly.");
-      } else {
-        setGeneralError("Please correct the errors in the form.");
-      }
-
-      return;
-    }
-
-    // Clear any previous errors
-    setErrors({});
-    setGeneralError("");
-
-    // If all validations pass
-    emailjs
-      .sendForm(
-        "service_atcmru7",
-        "template_np2wnte",
-        formRef.current,
-        "1JhpDFWb4tZlLmkCh"
-      )
-      .then(
-        () => {
-          onClose();
-          // Optionally show a success message here
-          alert("Your message has been sent successfully!");
-        },
-        (error) => {
-          console.error("Email send error:", error.text);
-          setGeneralError(
-            "There was a problem sending the email. Please try again."
-          );
-        }
-      );
-  };
 
   return (
     <>
@@ -500,67 +557,87 @@ const Header = () => {
                     <div className="row mb-3">
                       <div className="col-md-6 mb-3 mb-md-0">
                         <label
-                          htmlFor="fullName"
+                          htmlFor="firstName"
                           className="form-label text-white"
                         >
-                          Full Name*
+                          First Name*
                         </label>
                         <input
                           type="text"
-                          name="fullName"
+                          name="firstName"
                           className={`form-control ${
-                            errors.fullName && isSubmitted ? "is-invalid" : ""
+                            errors.firstName && isSubmitted ? "is-invalid" : ""
                           }`}
-                          id="fullName"
-                          placeholder="Enter Full Name"
-                          value={formData.fullName}
+                          id="firstName"
+                          placeholder="Enter First Name"
+                          value={formData.firstName}
                           onChange={handleChange}
                           style={{
                             backgroundColor: "transparent",
                             color: "white",
                           }}
                         />
-                        {errors.fullName && isSubmitted && (
+                        {errors.firstName && isSubmitted && (
                           <div className="invalid-feedback d-block">
-                            {errors.fullName}
+                            {errors.firstName}
                           </div>
                         )}
                       </div>
 
                       <div className="col-md-6">
                         <label
-                          htmlFor="mobileNumber"
+                          htmlFor="lastName"
                           className="form-label text-white"
                         >
-                          Mobile Number*
+                          Last Name
                         </label>
                         <input
                           type="text"
-                          name="mobileNumber"
-                          className={`form-control ${
-                            errors.mobileNumber && isSubmitted
-                              ? "is-invalid"
-                              : ""
-                          }`}
-                          id="mobileNumber"
-                          placeholder="Enter Mobile Number"
-                          value={formData.mobileNumber}
+                          name="lastName"
+                          className="form-control"
+                          id="lastName"
+                          placeholder="Enter Last Name (Optional)"
+                          value={formData.lastName}
                           onChange={handleChange}
                           style={{
                             backgroundColor: "transparent",
                             color: "white",
                           }}
                         />
-                        {errors.mobileNumber && isSubmitted && (
-                          <div className="invalid-feedback d-block">
-                            {errors.mobileNumber}
-                          </div>
-                        )}
                       </div>
                     </div>
 
                     <div className="row mb-3">
                       <div className="col-md-6 mb-3 mb-md-0">
+                        <label
+                          htmlFor="mobile"
+                          className="form-label text-white"
+                        >
+                          Mobile Number*
+                        </label>
+                        <input
+                          type="text"
+                          name="mobile"
+                          className={`form-control ${
+                            errors.mobile && isSubmitted ? "is-invalid" : ""
+                          }`}
+                          id="mobile"
+                          placeholder="Enter Mobile Number"
+                          value={formData.mobile}
+                          onChange={handleChange}
+                          style={{
+                            backgroundColor: "transparent",
+                            color: "white",
+                          }}
+                        />
+                        {errors.mobile && isSubmitted && (
+                          <div className="invalid-feedback d-block">
+                            {errors.mobile}
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="col-md-6">
                         <label
                           htmlFor="email"
                           className="form-label text-white"
@@ -588,35 +665,6 @@ const Header = () => {
                           </div>
                         )}
                       </div>
-
-                      <div className="col-md-6">
-                        <label
-                          htmlFor="company"
-                          className="form-label text-white"
-                        >
-                          Company Name*
-                        </label>
-                        <input
-                          type="text"
-                          name="company"
-                          className={`form-control ${
-                            errors.company && isSubmitted ? "is-invalid" : ""
-                          }`}
-                          id="company"
-                          placeholder="Enter Company Name"
-                          value={formData.company}
-                          onChange={handleChange}
-                          style={{
-                            backgroundColor: "transparent",
-                            color: "white",
-                          }}
-                        />
-                        {errors.company && isSubmitted && (
-                          <div className="invalid-feedback d-block">
-                            {errors.company}
-                          </div>
-                        )}
-                      </div>
                     </div>
 
                     <div className="row mb-3">
@@ -633,7 +681,7 @@ const Header = () => {
                           }`}
                           name="message"
                           id="message"
-                          rows="5"
+                          rows="4"
                           placeholder="Enter Your Message"
                           value={formData.message}
                           onChange={handleChange}
@@ -665,9 +713,51 @@ const Header = () => {
                       </div>
                     )}
 
-                    <div className="row mt-4">
+                    {/* submit */}
+                    <div className="row">
                       <div className="col-12 text-center">
-                        <ButtonGlobal text="Submit Message" type="submit" />
+                        {/* General error */}
+                        <AnimatePresence>
+                          {generalError && (
+                            <motion.div
+                              key="generalError"
+                              initial={{ opacity: 0, y: -8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -8 }}
+                              className="alert alert-danger text-center py-3"
+                              role="alert"
+                            >
+                              {generalError}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+
+                        {/* success */}
+                        <AnimatePresence>
+                          {sent && (
+                            <motion.div
+                              key="sent"
+                              initial={{ opacity: 0, y: -8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -8 }}
+                              className="alert alert-success text-center py-3"
+                              role="alert"
+                            >
+                              Your message has been sent successfully. We'll get
+                              back to you soon!
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                        <motion.div
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.97 }}
+                        >
+                          <ButtonGlobal
+                            text={isSubmitting ? "Sending..." : "Submit Message"}
+                            type="submit"
+                            disabled={isSubmitting}
+                          />
+                        </motion.div>
                       </div>
                     </div>
                   </form>

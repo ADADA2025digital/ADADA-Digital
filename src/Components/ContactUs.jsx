@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import emailjs from "@emailjs/browser";
 import ButtonGlobal from "../Components/Button";
@@ -30,7 +30,7 @@ const field = {
 
 const ContactUs = () => {
   const [showCaptcha, setShowCaptcha] = useState(false);
-  const formRef = useRef();
+  const formRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -50,125 +50,96 @@ const ContactUs = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [sent, setSent] = useState(false);
 
+  // Add useEffect to hide success message after 3 seconds
+  useEffect(() => {
+    let timeoutId;
+    
+    if (sent) {
+      timeoutId = setTimeout(() => {
+        setSent(false);
+      }, 3000); // 3 seconds
+    }
+    
+    // Cleanup function to clear the timeout if component unmounts
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [sent]); // This effect runs when 'sent' state changes
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     const updatedFormData = { ...formData, [name]: value };
 
     setFormData(updatedFormData);
 
-    // Clear specific error when user types
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: "" });
-    }
+    if (errors[name]) setErrors({ ...errors, [name]: "" });
+    if (generalError) setGeneralError("");
+    if (name === "message" && captchaError) setCaptchaError("");
 
-    // Clear general error when any field changes
-    if (generalError) {
-      setGeneralError("");
-    }
+    if (isSubmitted) setErrors(validate(updatedFormData));
 
-    // Clear captcha error when user types in message
-    if (name === "message" && captchaError) {
-      setCaptchaError("");
-    }
-
-    // If form has been submitted, validate this field immediately
-    if (isSubmitted) {
-      const validationErrors = validate();
-      setErrors(validationErrors);
-    }
-
-    if (name === "message") {
-      setShowCaptcha(value.trim().length > 0);
-    }
+    if (name === "message") setShowCaptcha(value.trim().length > 0);
   };
 
   const handleCaptchaChange = (value) => {
-    setCaptchaValue(value);
+    setCaptchaValue(value || "");
     setCaptchaError("");
   };
 
-  const validate = () => {
+  const validate = (data = formData) => {
     const newErrors = {};
 
-    // First Name validation
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = "First name is required";
-    } else if (!/^[a-zA-Z\s]+$/.test(formData.firstName.trim())) {
+    if (!data.firstName.trim()) newErrors.firstName = "First name is required";
+    else if (!/^[a-zA-Z\s]+$/.test(data.firstName.trim()))
       newErrors.firstName =
         "First name should not contain numbers or special characters";
-    }
 
-    // Last Name validation
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = "Last name is required";
-    } else if (!/^[a-zA-Z\s]+$/.test(formData.lastName.trim())) {
+    if (!data.lastName.trim()) newErrors.lastName = "Last name is required";
+    else if (!/^[a-zA-Z\s]+$/.test(data.lastName.trim()))
       newErrors.lastName =
         "Last name should not contain numbers or special characters";
-    }
 
-    // Email validation
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (
+    if (!data.email.trim()) newErrors.email = "Email is required";
+    else if (
       !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-        formData.email.trim()
+        data.email.trim(),
       )
-    ) {
+    )
       newErrors.email = "Enter a valid email address";
-    }
 
-    // Mobile Number validation
-    if (!formData.mobile.trim()) {
-      newErrors.mobile = "Mobile number is required";
-    } else if (!/^\d{10}$/.test(formData.mobile.trim())) {
+    if (!data.mobile.trim()) newErrors.mobile = "Mobile number is required";
+    else if (!/^\d{10}$/.test(data.mobile.trim()))
       newErrors.mobile = "Enter a valid 10-digit mobile number";
-    }
 
-    // Company validation
-    if (!formData.company.trim()) {
-      newErrors.company = "Company name is required";
-    }
+    if (!data.company.trim()) newErrors.company = "Company name is required";
+    if (!data.subject.trim()) newErrors.subject = "Subject is required";
 
-    // Subject validation
-    if (!formData.subject.trim()) {
-      newErrors.subject = "Subject is required";
-    }
-
-    // Message validation
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
-    } else if (formData.message.trim().length < 10) {
+    if (!data.message.trim()) newErrors.message = "Message is required";
+    else if (data.message.trim().length < 10)
       newErrors.message = "Message should be at least 10 characters long";
-    }
 
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitted(true);
     setIsSubmitting(true);
     setSent(false);
 
-    // First, validate all fields
-    const validationErrors = validate();
+    const validationErrors = validate(formData);
 
-    // Check if message has content (for captcha)
     const shouldCheckCaptcha = formData.message.trim().length > 0;
     const isCaptchaInvalid = shouldCheckCaptcha && !captchaValue;
 
-    // Set captcha error if needed
-    if (isCaptchaInvalid) {
-      setCaptchaError("Please complete the reCAPTCHA.");
-    } else {
-      setCaptchaError("");
-    }
+    if (isCaptchaInvalid) setCaptchaError("Please complete the reCAPTCHA.");
+    else setCaptchaError("");
 
-    // Check if there are validation errors OR captcha is invalid
     if (Object.keys(validationErrors).length > 0 || isCaptchaInvalid) {
       setErrors(validationErrors);
 
-      // Check if any required fields are empty
       const requiredFields = [
         "firstName",
         "lastName",
@@ -179,64 +150,62 @@ const ContactUs = () => {
         "message",
       ];
       const hasEmptyRequiredFields = requiredFields.some(
-        (field) => !formData[field].trim()
+        (f) => !formData[f].trim(),
       );
 
-      // Show general error if there are empty required fields or captcha is invalid
-      if (hasEmptyRequiredFields || isCaptchaInvalid) {
-        setGeneralError("Please fill in all the required fields correctly.");
-      } else {
-        setGeneralError("Please correct the errors in the form.");
-      }
+      setGeneralError(
+        hasEmptyRequiredFields || isCaptchaInvalid
+          ? "Please fill in all the required fields correctly."
+          : "Please correct the errors in the form.",
+      );
 
       setIsSubmitting(false);
       return;
     }
 
-    // Clear any previous errors
     setErrors({});
     setGeneralError("");
 
-    // If all validations pass
-    emailjs
-      .sendForm(
-        "service_atcmru7",
-        "template_rxvne43",
+    try {
+      await emailjs.sendForm(
+        "service_k2vg37v",
+        "template_zyksz58",
         formRef.current,
-        "1JhpDFWb4tZlLmkCh"
-      )
-      .then(() => {
-        setSent(true);
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          mobile: "",
-          company: "",
-          subject: "",
-          message: "",
-        });
-        setCaptchaValue("");
-        setShowCaptcha(false);
-        setIsSubmitted(false);
-        setGeneralError("");
-      })
-      .catch((error) => {
-        console.error("Email send error:", error?.text || error);
-        setGeneralError(
-          "There was a problem sending the email. Please try again."
-        );
-      })
-      .finally(() => {
-        setIsSubmitting(false);
+        "nysf1_-cRk-gUnJ2L",
+      );
+
+      setSent(true);
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        mobile: "",
+        company: "",
+        subject: "",
+        message: "",
       });
+      setCaptchaValue("");
+      setShowCaptcha(false);
+      setIsSubmitted(false);
+      setGeneralError("");
+    } catch (error) {
+      console.error("Email send error:", error?.text || error);
+      setGeneralError(
+        "There was a problem sending the email. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const submittedAt = new Date().toLocaleString();
+  const year = new Date().getFullYear();
 
   return (
     <section className="container-fluid contact-section d-flex align-items-center justify-content-center">
       <div className="container py-5 my-md-5 my-0 p-0">
         <div className="row align-items-center">
-          {/* LEFT: intro */}
+          {/* LEFT */}
           <motion.div
             className="col-md-4 col-12 mb-4 mb-md-0"
             variants={fadeLeft}
@@ -258,14 +227,14 @@ const ContactUs = () => {
             </p>
             <motion.img
               src={ContactImg}
-              alt="Description"
+              alt="Contact"
               className="img-animation img-fluid rounded"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             />
           </motion.div>
 
-          {/* RIGHT: form */}
+          {/* RIGHT */}
           <motion.div
             className="col-md-8 col-12"
             variants={fadeRight}
@@ -279,25 +248,16 @@ const ContactUs = () => {
                 Any Questions or Inquiries
               </h3>
 
-              {/* success message */}
-              <AnimatePresence>
-                {sent && (
-                  <motion.div
-                    key="sent"
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    className="alert alert-success text-center py-2"
-                    role="alert"
-                  >
-                    ✅ Your message has been sent successfully. We'll get back
-                    to you soon!
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
               <form ref={formRef} onSubmit={handleSubmit}>
-                {/* ROW: first/last name */}
+                {/* Hidden fields for template */}
+                <input type="hidden" name="submitted_at" value={submittedAt} />
+                <input type="hidden" name="year" value={year} />
+                <input type="hidden" name="reply_to" value={formData.email} />
+                
+                {/* ADDED: Hidden type field with value "contact" */}
+                <input type="hidden" name="type" value="contact" />
+
+                {/* ROW: first/last */}
                 <motion.div
                   className="row text-start"
                   variants={rowReveal}
@@ -322,24 +282,20 @@ const ContactUs = () => {
                     <motion.input
                       type="text"
                       name="firstName"
-                      className={`form-control p-3 ${
-                        errors.firstName && isSubmitted ? "is-invalid" : ""
-                      }`}
+                      autoComplete="given-name"
+                      className={`form-control p-3 ${errors.firstName && isSubmitted ? "is-invalid" : ""}`}
                       id="firstName"
                       value={formData.firstName}
                       onChange={handleChange}
                       variants={field}
                       whileFocus={{ scale: 1.01 }}
                       placeholder="Enter First Name"
+                      disabled={isSubmitting}
                     />
                     {errors.firstName && isSubmitted && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="invalid-feedback d-block"
-                      >
+                      <div className="invalid-feedback d-block">
                         {errors.firstName}
-                      </motion.div>
+                      </div>
                     )}
                   </motion.div>
 
@@ -360,24 +316,20 @@ const ContactUs = () => {
                     <motion.input
                       type="text"
                       name="lastName"
-                      className={`form-control p-3 ${
-                        errors.lastName && isSubmitted ? "is-invalid" : ""
-                      }`}
+                      autoComplete="family-name"
+                      className={`form-control p-3 ${errors.lastName && isSubmitted ? "is-invalid" : ""}`}
                       id="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
                       variants={field}
                       whileFocus={{ scale: 1.01 }}
                       placeholder="Enter Last Name"
+                      disabled={isSubmitting}
                     />
                     {errors.lastName && isSubmitted && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="invalid-feedback d-block"
-                      >
+                      <div className="invalid-feedback d-block">
                         {errors.lastName}
-                      </motion.div>
+                      </div>
                     )}
                   </motion.div>
                 </motion.div>
@@ -407,24 +359,20 @@ const ContactUs = () => {
                     <motion.input
                       type="email"
                       name="email"
-                      className={`form-control p-3 ${
-                        errors.email && isSubmitted ? "is-invalid" : ""
-                      }`}
+                      autoComplete="email"
+                      className={`form-control p-3 ${errors.email && isSubmitted ? "is-invalid" : ""}`}
                       id="email"
                       value={formData.email}
                       onChange={handleChange}
                       variants={field}
                       whileFocus={{ scale: 1.01 }}
                       placeholder="Enter Email Address"
+                      disabled={isSubmitting}
                     />
                     {errors.email && isSubmitted && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="invalid-feedback d-block"
-                      >
+                      <div className="invalid-feedback d-block">
                         {errors.email}
-                      </motion.div>
+                      </div>
                     )}
                   </motion.div>
 
@@ -445,24 +393,20 @@ const ContactUs = () => {
                     <motion.input
                       type="tel"
                       name="mobile"
-                      className={`form-control p-3 ${
-                        errors.mobile && isSubmitted ? "is-invalid" : ""
-                      }`}
+                      autoComplete="tel"
+                      className={`form-control p-3 ${errors.mobile && isSubmitted ? "is-invalid" : ""}`}
                       id="mobile"
                       value={formData.mobile}
                       onChange={handleChange}
                       variants={field}
                       whileFocus={{ scale: 1.01 }}
                       placeholder="Enter 10-digit Mobile Number"
+                      disabled={isSubmitting}
                     />
                     {errors.mobile && isSubmitted && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="invalid-feedback d-block"
-                      >
+                      <div className="invalid-feedback d-block">
                         {errors.mobile}
-                      </motion.div>
+                      </div>
                     )}
                   </motion.div>
                 </motion.div>
@@ -492,24 +436,19 @@ const ContactUs = () => {
                     <motion.input
                       type="text"
                       name="company"
-                      className={`form-control p-3 ${
-                        errors.company && isSubmitted ? "is-invalid" : ""
-                      }`}
+                      className={`form-control p-3 ${errors.company && isSubmitted ? "is-invalid" : ""}`}
                       id="company"
                       value={formData.company}
                       onChange={handleChange}
                       variants={field}
                       whileFocus={{ scale: 1.01 }}
                       placeholder="Enter Company Name"
+                      disabled={isSubmitting}
                     />
                     {errors.company && isSubmitted && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="invalid-feedback d-block"
-                      >
+                      <div className="invalid-feedback d-block">
                         {errors.company}
-                      </motion.div>
+                      </div>
                     )}
                   </motion.div>
 
@@ -530,24 +469,19 @@ const ContactUs = () => {
                     <motion.input
                       type="text"
                       name="subject"
-                      className={`form-control p-3 ${
-                        errors.subject && isSubmitted ? "is-invalid" : ""
-                      }`}
+                      className={`form-control p-3 ${errors.subject && isSubmitted ? "is-invalid" : ""}`}
                       id="subject"
                       value={formData.subject}
                       onChange={handleChange}
                       variants={field}
                       whileFocus={{ scale: 1.01 }}
                       placeholder="Enter Subject"
+                      disabled={isSubmitting}
                     />
                     {errors.subject && isSubmitted && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="invalid-feedback d-block"
-                      >
+                      <div className="invalid-feedback d-block">
                         {errors.subject}
-                      </motion.div>
+                      </div>
                     )}
                   </motion.div>
                 </motion.div>
@@ -575,9 +509,7 @@ const ContactUs = () => {
                       Message <span className="text-danger">*</span>
                     </motion.label>
                     <motion.textarea
-                      className={`form-control p-3 ${
-                        errors.message && isSubmitted ? "is-invalid" : ""
-                      }`}
+                      className={`form-control p-3 ${errors.message && isSubmitted ? "is-invalid" : ""}`}
                       name="message"
                       id="message"
                       rows="5"
@@ -586,15 +518,12 @@ const ContactUs = () => {
                       variants={field}
                       whileFocus={{ scale: 1.01 }}
                       placeholder="Enter Your Message (Minimum 10 characters)"
+                      disabled={isSubmitting}
                     />
                     {errors.message && isSubmitted && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="invalid-feedback d-block"
-                      >
+                      <div className="invalid-feedback d-block">
                         {errors.message}
-                      </motion.div>
+                      </div>
                     )}
                   </motion.div>
 
@@ -607,7 +536,7 @@ const ContactUs = () => {
                       exit={{ opacity: 0, y: 8 }}
                     >
                       <ReCAPTCHA
-                        sitekey="6LcVdPsqAAAAAFeo84JcbbftJHjL6T0UKf0KCAjQ"
+                        sitekey="6LfTOPoqAAAAALiP94ZP6TEYP5XiTsKjvr7dpYh9"
                         theme="dark"
                         onChange={handleCaptchaChange}
                       />
@@ -620,14 +549,41 @@ const ContactUs = () => {
                   )}
                 </motion.div>
 
-                {/* ROW: submit */}
-                <motion.div
-                  className="row"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                >
+                {/* submit */}
+                <div className="row">
                   <div className="col-12 text-center">
+                    {/* General error */}
+                    <AnimatePresence>
+                      {generalError && (
+                        <motion.div
+                          key="generalError"
+                          initial={{ opacity: 0, y: -8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -8 }}
+                          className="alert alert-success text-center py-3"
+                          role="alert"
+                        >
+                          {generalError}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {/* success */}
+                    <AnimatePresence>
+                      {sent && (
+                        <motion.div
+                          key="sent"
+                          initial={{ opacity: 0, y: -8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -8 }}
+                          className="alert alert-success text-center py-3"
+                          role="alert"
+                        >
+                          Your message has been sent successfully. We'll get
+                          back to you soon!
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                     <motion.div
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.97 }}
@@ -640,7 +596,7 @@ const ContactUs = () => {
                       />
                     </motion.div>
                   </div>
-                </motion.div>
+                </div>
               </form>
             </div>
           </motion.div>
