@@ -769,7 +769,7 @@ function Home() {
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
             >
-              <div className="row theme-background rounded-4 p-md-4 p-0 g-md-4 g-2 stats-row">
+              <div className="row theme-background rounded-4 p-md-4 p-0 g-md-4 g-0 stats-row">
                 {statsData.map((stat, index) => (
                   <div key={stat.id} className="col-12 col-md-6 col-lg-4">
                     <motion.div
