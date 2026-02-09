@@ -607,7 +607,7 @@ footer .dropdown-menu {
   list-style: none;
   padding: 0;
   margin: 0;
-  z-index: 10;
+  z-index: 2;
 }
 
 .slick-dots li {
@@ -770,6 +770,10 @@ footer .dropdown-menu {
 .info-card {
   background: linear-gradient(180deg, #f37033 40%, #ee3b4b 100%);
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.info-img{
+  width: 90%;
 }
 
 /* Services Page */

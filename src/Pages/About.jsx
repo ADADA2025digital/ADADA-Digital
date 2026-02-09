@@ -321,7 +321,7 @@ const About = () => {
 
       {/* Why Work With Us Section */}
       <section className="my-md-5 my-0 pt-md-5 pt-0">
-        <div className="container p-0">
+        <div className="container">
           <motion.div
             variants={fadeInUp}
             initial="hidden"
@@ -331,9 +331,8 @@ const About = () => {
             <WhyWorkWithUs />
           </motion.div>
 
-          <div className="row my-md-5 my-2">
+          <div className="my-md-5 my-2">
             <div className="col-12 text-center">
-              {/* Desktop / Tablet view: normal grid */}
               <motion.div
                 className="row d-none d-md-flex"
                 variants={stagger}
@@ -361,7 +360,6 @@ const About = () => {
                 ))}
               </motion.div>
 
-              {/* Mobile view: slider */}
               <motion.div
                 className="d-md-none mb-5 pb-5"
                 variants={stagger}
@@ -394,7 +392,7 @@ const About = () => {
           </div>
 
           <motion.div
-            className="row mb-4"
+            className="mb-4"
             variants={fadeInUp}
             initial="hidden"
             whileInView="show"
@@ -473,7 +471,6 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* Desktop / Tablet: normal grid */}
           <motion.div
             className="row d-none d-md-flex"
             variants={gridStagger}
@@ -497,7 +494,6 @@ const About = () => {
             ))}
           </motion.div>
 
-          {/* Mobile: slider like TeamSlider */}
           <motion.div
             className="d-md-none"
             variants={gridStagger}
@@ -544,7 +540,7 @@ const About = () => {
                 with <br /> Reliable Payment Solutions
               </h2>
 
-              <motion.div
+              {/* <motion.div
                 className="client-logos d-none d-flex flex-wrap justify-content-center align-items-center gap-5 mt-5"
                 variants={stagger}
                 initial="hidden"
@@ -569,8 +565,7 @@ const About = () => {
                 ))}
               </motion.div>
 
-              {/* Logo marquee */}
-              <div className="client-logos d-flex d-md-none position-relative overflow-hidden py-5">
+              <div className="client-logos d-flex position-relative overflow-hidden py-5">
                 <div className="logo-wrapper d-flex">
                   {[...images, ...images].map((imageSrc, index) => (
                     <img
@@ -581,7 +576,7 @@ const About = () => {
                     />
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           </motion.div>
 

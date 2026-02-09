@@ -528,7 +528,7 @@ const Header = () => {
             className="modal-backdrop d-flex justify-content-center align-items-center position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 overflow-auto py-md-5 p-y-0"
             style={{ zIndex: 1050, backdropFilter: "blur(5px)" }}
           >
-            <div className="col-md-6 col-12 mobile-full">
+            <div className="col-md-6 col-12 mobile-full py-4 py-md-0">
               <div className="card bg-dark rounded-4 quote z-1 overflow-hidden text-white position-relative">
                 <div className="quote-outline overflow-hidden position-absolute"></div>
 

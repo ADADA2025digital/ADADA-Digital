@@ -18,9 +18,9 @@ const pillItem = {
 
 const WhyWorkWithUs = () => {
   return (
-    <div className="row mb-4 pt-5">
+    <div className="row mb-4 pt-5 overflow-x-hidden">
       <div className="col-12">
-        <div className="row align-items-start justify-content-between gx-4 gy-4">
+        <div className="row align-items-start justify-content-between gx-0 gx-md-4 gy-4">
           <div className="col-12 col-md-6 text-start">
             <motion.p
               className="fs-5 heading text-center text-md-start fw-bold my-4 text-danger text-uppercase"
@@ -49,7 +49,8 @@ const WhyWorkWithUs = () => {
               {servicesListData.map((service, index) => (
                 <motion.span
                   key={index}
-                  className="service-pill cursor bg-dark rounded-pill p-3 position-relative text-white heading z-1 text-center overflow-hidden"
+                  className="service-pill cursor bg-dark rounded-pill px-3 py-2 position-relative text-white heading z-1 text-center overflow-hidden d-inline-flex align-items-center justify-content-center flex-shrink-1 text-wrap mw-100"
+                  style={{ maxWidth: "100%", whiteSpace: "normal" }}
                   variants={pillItem}
                   initial="hidden"
                   whileInView="show"
