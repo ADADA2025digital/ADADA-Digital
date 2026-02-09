@@ -540,7 +540,7 @@ const About = () => {
                 with <br /> Reliable Payment Solutions
               </h2>
 
-              {/* <motion.div
+              <motion.div
                 className="client-logos d-none d-flex flex-wrap justify-content-center align-items-center gap-5 mt-5"
                 variants={stagger}
                 initial="hidden"
@@ -576,7 +576,7 @@ const About = () => {
                     />
                   ))}
                 </div>
-              </div> */}
+              </div>
             </div>
           </motion.div>
 
