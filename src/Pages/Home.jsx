@@ -504,7 +504,7 @@ function Home() {
             </div>
 
             {/* Testimonials */}
-            <div className="row theme-background rounded-4 p-2 p-md-4">
+            <div className="row theme-background rounded-4 p-2 p-md-4 mx-2 mx-md-0">
               <motion.div
                 className="d-flex flex-md-row flex-column review-row"
                 variants={container}
