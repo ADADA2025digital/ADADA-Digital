@@ -104,7 +104,7 @@ function SubscribeSection() {
           >
             <h2 className="fs-2 fw-bold mb-2">
               Stay Updated <br />
-              With Adada Digital
+              With ADADA Digital
             </h2>
             <p className="lh-base heading fs-6">
               Get the latest updates on web development, digital marketing trends,

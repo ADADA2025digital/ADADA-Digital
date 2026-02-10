@@ -338,7 +338,7 @@ const Header = () => {
           <div className="container">
             <div className="col-auto d-flex align-items-center">
               <Link to="/" className="navbar-heading">
-                <img src={Logo} alt="Logo" className="logo-img" />
+                <img src={Logo} alt="Logo of ADADA Digital" className="logo-img" />
               </Link>
             </div>
 
@@ -445,7 +445,7 @@ const Header = () => {
             <h5 className="offcanvas-title w-100" id="mobileMenuLabel">
               <img
                 src={Logo}
-                alt="Logo"
+                alt="Logo of ADADA Digital"
                 className="logo"
                 style={{ height: "50px" }}
               />
@@ -536,7 +536,7 @@ const Header = () => {
                 <div className="card-header border-0 position-relative">
                   <img
                     src={Logosm}
-                    alt="Logo"
+                    alt="Logo of ADADA Digital"
                     className="logo-img position-relative"
                   />
 

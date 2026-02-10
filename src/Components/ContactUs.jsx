@@ -53,13 +53,13 @@ const ContactUs = () => {
   // Add useEffect to hide success message after 3 seconds
   useEffect(() => {
     let timeoutId;
-    
+
     if (sent) {
       timeoutId = setTimeout(() => {
         setSent(false);
       }, 3000); // 3 seconds
     }
-    
+
     // Cleanup function to clear the timeout if component unmounts
     return () => {
       if (timeoutId) {
@@ -227,7 +227,7 @@ const ContactUs = () => {
             </p>
             <motion.img
               src={ContactImg}
-              alt="Contact"
+              alt="Illustration of people contacting support"
               className="img-animation img-fluid rounded"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -253,7 +253,7 @@ const ContactUs = () => {
                 <input type="hidden" name="submitted_at" value={submittedAt} />
                 <input type="hidden" name="year" value={year} />
                 <input type="hidden" name="reply_to" value={formData.email} />
-                
+
                 {/* ADDED: Hidden type field with value "contact" */}
                 <input type="hidden" name="type" value="contact" />
 

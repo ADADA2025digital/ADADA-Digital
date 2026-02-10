@@ -319,25 +319,30 @@ function Home() {
             </motion.span>
 
             <motion.h1 className="my-4 display-3 fw-bold" variants={fadeUp}>
-              Transforming Ideas into <br /> Digital Reality
+              We Design & Build High-Converting <br /> Websites for Growing
+              Businesses
             </motion.h1>
 
             <motion.p className="mb-3 fs-5 heading" variants={fadeUp}>
-              Bringing your vision to life with innovative digital solutions,
-              combining creativity and
-              <br />
-              technology to achieve outstanding results for your business.
+              Web design, development, and digital marketing that turns visitors
+              into customers.
             </motion.p>
 
             <motion.div
+              className="d-flex align-items-center justify-content-center gap-3 mt-5"
               variants={fadeUp}
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 380, damping: 24 }}
             >
               <ButtonGlobal
-                text="Explore Now"
-                to="/about"
+                text="Get a Free Consultation"
+                to="/contact-us"
+                ariaLabel="Go to the About page"
+              />
+              <ButtonGlobal
+                text="View Our Work"
+                to="/services"
                 ariaLabel="Go to the About page"
               />
             </motion.div>
@@ -575,7 +580,7 @@ function Home() {
               </Slider>
             </div>
 
-            {/* ✅ Desktop Grid (your current layout) */}
+            {/* Desktop Grid (your current layout) */}
             <div className="d-none d-md-block">
               {/* Row 1 */}
               <motion.div

@@ -43,7 +43,7 @@ const HeroSection = ({ title, subtitle, imageRight }) => {
             >
               <img
                 src={design2}
-                alt="Hero"
+                alt="Hero section illustration showcasing our platform"
                 className="img-animation img-fluid rounded"
               />
             </motion.div>
@@ -83,7 +83,7 @@ const HeroSection = ({ title, subtitle, imageRight }) => {
             >
               <img
                 src={design1}
-                alt="Hero"
+                alt="Hero section illustration showcasing our platform"
                 className="img-animation img-fluid rounded position-relative"
               />
             </motion.div>
@@ -99,7 +99,7 @@ const HeroSection = ({ title, subtitle, imageRight }) => {
           >
             <motion.img
               src={imageRight}
-              alt="Hero"
+              alt="Hero section illustration showcasing our platform"
               className="hero-img img-animation img-fluid rounded"
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 250, damping: 20 }}

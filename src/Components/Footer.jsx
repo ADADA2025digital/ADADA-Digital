@@ -55,7 +55,7 @@ const Footer = () => {
             <div>
               <img
                 src={Logo}
-                alt="logo"
+                alt="logo of ADADA Digital"
                 className="my-2"
                 style={{ width: "180px" }}
               />

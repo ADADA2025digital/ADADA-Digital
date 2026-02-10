@@ -82,19 +82,19 @@ export const reviewData = [
     id: 1,
     client: "Western Sydney Tamil Study Centre (WSTSC)",
     description:
-      "Adada Digital built our website and school management system with online enrolment, student tracking, parent access, and digital resource management. The platform simplified our academic operations and improved parent communication.",
+      "ADADA Digital built our website and school management system with online enrolment, student tracking, parent access, and digital resource management. The platform simplified our academic operations and improved parent communication.",
   },
   {
     id: 2,
     client: "Rosewood Gardens",
     description:
-      "Adada Digital developed our business website and a dashboard to manage service bookings and career applications. The platform improved our online reach, customer engagement, and internal service operations.",
+      "ADADA Digital developed our business website and a dashboard to manage service bookings and career applications. The platform improved our online reach, customer engagement, and internal service operations.",
   },
   {
     id: 3,
     client: "Sydney Sri Ayyappa Swami Centre",
     description:
-      "Adada Digital built our website and content management system to handle website updates and social media content. It strengthened our digital presence and improved communication with our devotees.",
+      "ADADA Digital built our website and content management system to handle website updates and social media content. It strengthened our digital presence and improved communication with our devotees.",
   },
 ];
 

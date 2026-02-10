@@ -251,7 +251,7 @@ const About = () => {
               <IntroSection
                 title="About Us"
                 subtitle="Discover Our Story, Mission, and Vision for the Future"
-                description="At Adada Digital, we are committed to delivering cutting-edge digital solutions that empower businesses in a fast-paced digital world. With a team of innovators, tech experts, and strategic thinkers, we craft tailored digital strategies that align seamlessly with your brand’s vision and objectives."
+                description="At ADADA Digital, we are committed to delivering cutting-edge digital solutions that empower businesses in a fast-paced digital world. With a team of innovators, tech experts, and strategic thinkers, we craft tailored digital strategies that align seamlessly with your brand’s vision and objectives."
               />
             </motion.div>
 
@@ -421,7 +421,7 @@ const About = () => {
                       <img
                         src={Logo}
                         className="p-3"
-                        alt="logo"
+                        alt="logo of ADADA Digital"
                         style={{ width: "120px" }}
                       />
                     </motion.div>
@@ -435,7 +435,7 @@ const About = () => {
                     transition={{ duration: 0.45, ease: "easeOut" }}
                   >
                     <p className="m-0">
-                      At Adada Digital, we build modern, high performance
+                      At ADADA Digital, we build modern, high performance
                       digital solutions that help businesses grow in a fast
                       evolving digital world. With a skilled team of designers,
                       developers, and strategists, we craft tailored digital

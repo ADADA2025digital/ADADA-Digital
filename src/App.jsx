@@ -35,7 +35,7 @@ function AppContent() {
     if (location.pathname === "/" && !hasSeenLoader) {
       setLoading(true);
 
-      const MIN_LOADER_MS = 4000;
+      const MIN_LOADER_MS = 6000;
       const start = Date.now();
 
       const finish = () => {
