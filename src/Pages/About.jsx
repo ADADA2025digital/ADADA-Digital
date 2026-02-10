@@ -83,7 +83,7 @@ const slideLeft = {
   show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
 };
 const slideRight = {
-  hidden: { opacity: 0, x: 30 },
+  hidden: { opacity: 0, x: -30 },
   show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
 };
 
@@ -525,62 +525,60 @@ const About = () => {
       <section className="py-5">
         <div className="container p-0">
           <motion.div
-            className="row my-md-5 my-0"
+            className="col-12 text-center"
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.35 }}
           >
-            <div className="col-12 text-center">
-              <h5 className="text-uppercase heading my-4 text-danger fw-bold custom-letter-spacing px-3 p-md-0">
-                Our Trusted Clients
-              </h5>
-              <h2 className="text-white fs-2 fw-bold px-3 p-md-0">
-                Empowering <span className="outline">Global Businesses</span>{" "}
-                with <br /> Reliable Payment Solutions
-              </h2>
+            <h5 className="text-uppercase heading my-4 text-danger fw-bold custom-letter-spacing px-3 p-md-0">
+              Our Trusted Clients
+            </h5>
+            <h2 className="text-white fs-2 fw-bold px-3 p-md-0">
+              Empowering <span className="outline">Global Businesses</span> with{" "}
+              <br /> Reliable Payment Solutions
+            </h2>
 
-              <motion.div
-                className="client-logos d-none d-flex flex-wrap justify-content-center align-items-center gap-5 mt-5"
-                variants={stagger}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.3 }}
-              >
-                {images.map((img, index) => (
-                  <motion.img
-                    key={index}
-                    src={img}
+            <motion.div
+              className="client-logos d-none d-flex flex-wrap justify-content-center align-items-center gap-5 mt-5"
+              variants={stagger}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              {images.map((img, index) => (
+                <motion.img
+                  key={index}
+                  src={img}
+                  alt={`Client Logo ${index + 1}`}
+                  className="client-logo img-fluid"
+                  style={{ maxHeight: "150px", objectFit: "contain" }}
+                  variants={logoItem}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20,
+                  }}
+                />
+              ))}
+            </motion.div>
+
+            <div className="client-logos d-flex position-relative overflow-hidden py-5">
+              <div className="logo-wrapper d-flex">
+                {[...images, ...images].map((imageSrc, index) => (
+                  <img
+                    src={imageSrc}
                     alt={`Client Logo ${index + 1}`}
-                    className="client-logo img-fluid"
-                    style={{ maxHeight: "150px", objectFit: "contain" }}
-                    variants={logoItem}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 20,
-                    }}
+                    key={`client-${index}`}
+                    className="client-logo mx-5"
                   />
                 ))}
-              </motion.div>
-
-              <div className="client-logos d-flex position-relative overflow-hidden py-5">
-                <div className="logo-wrapper d-flex">
-                  {[...images, ...images].map((imageSrc, index) => (
-                    <img
-                      src={imageSrc}
-                      alt={`Client Logo ${index + 1}`}
-                      key={`client-${index}`}
-                      className="client-logo mx-5"
-                    />
-                  ))}
-                </div>
               </div>
             </div>
           </motion.div>
 
-          <div className="row my-md-5 my-0 py-5">
+          <div className="row gx-0 my-md-5 my-0 py-5">
             <motion.div
               className="col-md-4 d-flex align-items-center justify-content-center"
               variants={slideLeft}
@@ -592,7 +590,7 @@ const About = () => {
             </motion.div>
 
             <motion.div
-              className="col-md-4 text-center info-image my-md-0 my-5 d-flex align-items-center justify-content-center position-relative"
+              className="col-md-4 text-center info-image my-md-0 my-5 px-0 px-md-auto d-flex align-items-center justify-content-center position-relative"
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -606,7 +604,11 @@ const About = () => {
                 src={Infomodel}
                 alt="Person holding a laptop"
                 className="img-fluid"
-                style={{ objectFit: "cover", height: "650px" }}
+                style={{
+                  width: "100%",
+                  height: "clamp(480px, 50vw, 650px)",
+                  objectFit: "cover",
+                }}
               />
             </motion.div>
 
