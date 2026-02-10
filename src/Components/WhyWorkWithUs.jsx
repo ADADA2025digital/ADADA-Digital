@@ -18,7 +18,7 @@ const pillItem = {
 
 const WhyWorkWithUs = () => {
   return (
-    <div className="row mb-4 pt-5 overflow-x-hidden">
+    <div className="row mb-4 pt-5">
       <div className="col-12">
         <div className="row align-items-start justify-content-between gx-0 gx-md-4 gy-4">
           <div className="col-12 col-md-6 text-start">
