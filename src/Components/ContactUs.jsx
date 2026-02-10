@@ -536,7 +536,7 @@ const ContactUs = () => {
                       exit={{ opacity: 0, y: 8 }}
                     >
                       <ReCAPTCHA
-                        sitekey="6LfTOPoqAAAAALiP94ZP6TEYP5XiTsKjvr7dpYh9"
+                        sitekey="6LfNrWYsAAAAAKWZwB06fHgFtjgablP3fe7WSGux"
                         theme="dark"
                         onChange={handleCaptchaChange}
                       />

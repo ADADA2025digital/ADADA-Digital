@@ -700,7 +700,7 @@ const Header = () => {
                     {showCaptcha && (
                       <div className="mb-3 d-flex flex-column align-items-center">
                         <ReCAPTCHA
-                          sitekey="6LcVdPsqAAAAAFeo84JcbbftJHjL6T0UKf0KCAjQ"
+                          sitekey="6LfNrWYsAAAAAKWZwB06fHgFtjgablP3fe7WSGux"
                           theme="dark"
                           onChange={handleCaptchaChange}
                         />
