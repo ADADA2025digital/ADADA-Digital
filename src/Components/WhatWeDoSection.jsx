@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef } from "react";
+// WhatWeDoSection.jsx
+import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import ContentHeader from "./ContentHeader";
 import { whatwedoData } from "../Constants/Data";
@@ -6,54 +7,39 @@ import { motion } from "framer-motion";
 
 const WhatWeDoSection = () => {
   const [slidesToShow, setSlidesToShow] = useState(3);
-  const [activeDot, setActiveDot] = useState(0);
   const sliderRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-  // ---- config for custom dots ----
-  const TOTAL_DOTS = 5; // always show 5 dots
-  const groupSize = Math.ceil(whatwedoData.length / TOTAL_DOTS); // cards per dot
-
-  // Handle responsive behavior manually
+  // Responsive behavior
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
 
-      if (width < 768) {
-        // Mobile
-        setSlidesToShow(1);
-      } else if (width < 1024) {
-        // Tablet
-        setSlidesToShow(2);
-      } else {
-        // Desktop
-        setSlidesToShow(3);
-      }
+      if (width < 768) setSlidesToShow(1);
+      else if (width < 1024) setSlidesToShow(2);
+      else setSlidesToShow(3);
     };
 
-    handleResize(); // Run once on mount
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const [currentSlide, setCurrentSlide] = useState(0);
-
+  // Slick settings (NO dots, NO default arrows)
   const settings = {
-    dots: false, // turn off default slick dots
-    arrows: false,
+    dots: false, // ✅ removed
+    arrows: false, // ✅ removed (we use custom arrows)
     infinite: true,
     speed: 1000,
-    slidesToShow, // controlled by state
-    slidesToScroll: 1,
+    slidesToShow,
+    slidesToScroll: 1, // ✅ smooth shift (all visible cards move together)
     autoplay: true,
     autoplaySpeed: 5000,
-    centerMode: slidesToShow === 3, // only center on desktop
-    centerPadding: "0px",
-    beforeChange: (_current, next) => {
-      // update active dot when slide changes
-      const nextGroup = Math.floor(next / groupSize);
-      setActiveDot(nextGroup);
-    },
-    afterChange: (i) => setCurrentSlide(i),
+    pauseOnHover: true,
+    swipeToSlide: true,
+    accessibility: true,
+    beforeChange: (_current, next) => setCurrentSlide(next),
+    afterChange: (idx) => setCurrentSlide(idx),
   };
 
   const container = {
@@ -73,25 +59,13 @@ const WhatWeDoSection = () => {
     },
   };
 
-  const handleDotClick = (index) => {
-    setActiveDot(index);
-    const slideIndex = index * groupSize;
-    if (sliderRef.current) {
-      sliderRef.current.slickGoTo(slideIndex);
-    }
-  };
-
   return (
     <section className="what-we-do py-5">
       <div className="container">
-        {/* Header reveal */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.4 },
-          }}
+          whileInView={{ opacity: 1, y: 0, transition: { duration: 0.4 } }}
           viewport={{ once: true, amount: 0.35 }}
         >
           <ContentHeader
@@ -102,6 +76,7 @@ const WhatWeDoSection = () => {
           />
         </motion.div>
 
+        {/* Slider */}
         <motion.div
           variants={container}
           initial="hidden"
@@ -120,11 +95,7 @@ const WhatWeDoSection = () => {
                   tabIndex={currentSlide === index ? 0 : -1}
                   aria-hidden={currentSlide === index ? "false" : "true"}
                   whileTap={{ scale: 0.99 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 280,
-                    damping: 20,
-                  }}
+                  transition={{ type: "spring", stiffness: 280, damping: 20 }}
                   style={{ transformStyle: "preserve-3d" }}
                 >
                   <div className="card-inner position-relative h-100">
@@ -170,7 +141,7 @@ const WhatWeDoSection = () => {
                       </div>
                     </div>
 
-                    {/* Back (if you later add flip CSS) */}
+                    {/* Back */}
                     <div className="card-back rounded-4 position-absolute top-0 start-0 w-100 h-100">
                       <div className="card-body d-flex flex-column align-items-center justify-content-center text-center p-3">
                         <img
@@ -204,27 +175,25 @@ const WhatWeDoSection = () => {
             ))}
           </Slider>
 
-          {/* ---- Custom 5 dots ---- */}
-          <div className="custom-dots d-flex justify-content-center mt-5">
-            {Array.from({ length: TOTAL_DOTS }).map((_, index) => (
-              <button
-                key={index}
-                type="button"
-                onClick={() => handleDotClick(index)}
-                className={`mx-1 custom-dot rounded-circle border-0 ${
-                  activeDot === index ? "bg-white" : "bg-secondary"
-                }`}
-                style={{
-                  width: "10px",
-                  height: "10px",
-                  opacity: activeDot === index ? 1 : 0.5,
-                  transition: "opacity 0.2s, transform 0.2s",
-                  transform: activeDot === index ? "scale(1.2)" : "scale(1)",
-                }}
-                aria-label={`Go to slide ${index + 1}`}
-                aria-current={activeDot === index ? "true" : undefined}
-              />
-            ))}
+          {/* ✅ Bottom Arrow Controls (Bootstrap Icons) */}
+          <div className="slider-arrows d-flex justify-content-center gap-2 mt-4">
+            <button
+              type="button"
+              className="btn bg-transparent border-0 text-danger"
+              aria-label="Previous"
+              onClick={() => sliderRef.current?.slickPrev()}
+            >
+              <i className="bi bi-arrow-left-square text-danger fs-1"></i>
+            </button>
+
+            <button
+              type="button"
+              className="btn bg-transparent border-0 text-danger"
+              aria-label="Next"
+              onClick={() => sliderRef.current?.slickNext()}
+            >
+              <i className="bi bi-arrow-right-square text-danger fs-1"></i>
+            </button>
           </div>
         </motion.div>
       </div>
