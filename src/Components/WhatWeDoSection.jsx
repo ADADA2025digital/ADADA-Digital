@@ -1,4 +1,3 @@
-// WhatWeDoSection.jsx
 import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import ContentHeader from "./ContentHeader";
@@ -27,12 +26,12 @@ const WhatWeDoSection = () => {
 
   // Slick settings (NO dots, NO default arrows)
   const settings = {
-    dots: false, // ✅ removed
-    arrows: false, // ✅ removed (we use custom arrows)
+    dots: false,
+    arrows: false, 
     infinite: true,
     speed: 1000,
     slidesToShow,
-    slidesToScroll: 1, // ✅ smooth shift (all visible cards move together)
+    slidesToScroll: 1, 
     autoplay: true,
     autoplaySpeed: 5000,
     pauseOnHover: true,
@@ -175,7 +174,7 @@ const WhatWeDoSection = () => {
             ))}
           </Slider>
 
-          {/* ✅ Bottom Arrow Controls (Bootstrap Icons) */}
+          {/* Bottom Arrow Controls (Bootstrap Icons) */}
           <div className="slider-arrows d-flex justify-content-center gap-2 mt-4">
             <button
               type="button"
