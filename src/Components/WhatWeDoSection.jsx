@@ -133,15 +133,18 @@ const WhatWeDoSection = () => {
                     <div className="card-front rounded-4 w-100 h-100 position-absolute">
                       <div className="card-body text-center d-flex flex-column align-items-center justify-content-center p-3">
                         <motion.img
-                          src={card.imgSrc}
-                          className="card-img-top my-3"
-                          alt={card.title}
-                          style={{ height: "100px", width: "100px" }}
-                          initial={{ opacity: 0, y: 10 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.35 }}
-                        />
+  src={card.imgSrc}
+  className="card-img-top my-3"
+  alt={card.title}
+  width={100}
+  height={100}
+  style={{ objectFit: "contain" }}
+  initial={{ opacity: 0, y: 10 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.35 }}
+/>
+
                         <h4 className="card-title lh-base fw-bold">
                           {card.title}
                         </h4>
@@ -172,11 +175,14 @@ const WhatWeDoSection = () => {
                     <div className="card-back rounded-4 position-absolute top-0 start-0 w-100 h-100">
                       <div className="card-body d-flex flex-column align-items-center justify-content-center text-center p-3">
                         <img
-                          src={card.imgSrc}
-                          className="card-img-top my-3"
-                          alt={card.title}
-                          style={{ height: "100px", width: "100px" }}
-                        />
+  src={card.imgSrc}
+  className="card-img-top my-3"
+  alt={card.title}
+  width={100}
+  height={100}
+  style={{ objectFit: "contain" }}
+/>
+
                         <h4 className="card-title lh-base fw-bold">
                           {card.title}
                         </h4>
