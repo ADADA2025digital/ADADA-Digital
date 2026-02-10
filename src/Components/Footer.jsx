@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import Logo from "../assets/Images/logo.png";
+import Logo from "../assets/Images/footer-logo.png";
 import Dropdown from "bootstrap/js/dist/dropdown";
 
 const fadeInUp = {
@@ -56,8 +56,8 @@ const Footer = () => {
               <img
                 src={Logo}
                 alt="logo of ADADA Digital"
-                className="my-2"
-                style={{ width: "180px" }}
+                className="mt-2"
+                style={{ width: "200px" }}
               />
             </div>
 

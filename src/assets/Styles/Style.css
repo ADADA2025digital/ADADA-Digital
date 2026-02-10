@@ -173,7 +173,7 @@ body {
 }
 
 .logo-img {
-  height: 70px;
+  height: 55px;
   transition:
     height 600ms ease,
     transform 600ms ease;
@@ -181,7 +181,7 @@ body {
 }
 
 .navbar-shrink .logo-img {
-  height: 65px;
+  height: 50px;
   transform: translateZ(0);
 }
 
