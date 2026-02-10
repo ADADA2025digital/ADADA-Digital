@@ -593,6 +593,7 @@ const ContactUs = () => {
                         type="submit"
                         className="px-5"
                         disabled={isSubmitting}
+                        ariaLabel="Submit form"
                       />
                     </motion.div>
                   </div>

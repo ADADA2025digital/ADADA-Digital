@@ -95,7 +95,7 @@ const WhatWeDoSection = () => {
             title={"Delivering Tailored Digital\nSolutions for You"}
             subtitle="What We Do"
             description="We craft digital solutions, leveraging technology and strategy to drive innovation, efficiency, and success while transforming challenges into opportunities."
-            buttonPath="/explore"
+            buttonPath="/services"
           />
         </motion.div>
 
@@ -216,6 +216,8 @@ const WhatWeDoSection = () => {
                   transition: "opacity 0.2s, transform 0.2s",
                   transform: activeDot === index ? "scale(1.2)" : "scale(1)",
                 }}
+                aria-label={`Go to slide ${index + 1}`}
+                aria-current={activeDot === index ? "true" : undefined}
               />
             ))}
           </div>

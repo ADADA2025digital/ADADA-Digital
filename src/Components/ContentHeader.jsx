@@ -52,7 +52,7 @@ const ContentHeader = ({ title, subtitle, description, buttonPath }) => {
         >
           <motion.p variants={fadeInUp}>{description}</motion.p>
           <motion.div variants={fadeInUp} whileTap={{ scale: 0.98 }}>
-            <ButtonGlobal text="Explore More" to={buttonPath} />
+            <ButtonGlobal text="Explore More" to={buttonPath}   ariaLabel="Explore more details about this section" />
           </motion.div>
         </motion.div>
       </motion.div>

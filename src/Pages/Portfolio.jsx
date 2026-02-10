@@ -22,7 +22,10 @@ const Portfolio = () => {
   return (
     <>
       <Helmet>
-        <title>Case Studies - ADADA Digital | Web Development & Digital Agency Services</title>
+        <title>
+          Case Studies - ADADA Digital | Web Development & Digital Agency
+          Services
+        </title>
 
         <meta
           name="description"
@@ -151,31 +154,36 @@ const Portfolio = () => {
             aria-label="Portfolio pagination"
           >
             <button
+              type="button"
               className="pagination-btn pagination-arrow"
               onClick={() => handlePageChange(1)}
               disabled={currentPage === 1}
+              aria-label="Go to first page"
             >
-              <i className="bi bi-chevron-double-left"></i>
+              <i className="bi bi-chevron-double-left" aria-hidden="true"></i>
             </button>
 
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
                 key={page}
+                type="button"
                 onClick={() => handlePageChange(page)}
-                className={`pagination-btn ${
-                  currentPage === page ? "is-active" : ""
-                }`}
+                className={`pagination-btn ${currentPage === page ? "is-active" : ""}`}
+                aria-label={`Go to page ${page}`}
+                aria-current={currentPage === page ? "page" : undefined}
               >
                 {page}
               </button>
             ))}
 
             <button
+              type="button"
               className="pagination-btn pagination-arrow"
               onClick={() => handlePageChange(totalPages)}
               disabled={currentPage === totalPages}
+              aria-label="Go to last page"
             >
-              <i className="bi bi-chevron-double-right"></i>
+              <i className="bi bi-chevron-double-right" aria-hidden="true"></i>
             </button>
           </nav>
         )}

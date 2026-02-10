@@ -187,7 +187,6 @@ const Footer = () => {
                 Address:
                 <br /> NSW, Sydney, Au
               </li>
-
             </ul>
           </motion.div>
         </div>
@@ -220,18 +219,30 @@ const Footer = () => {
                   className="btn btn-dark dropdown-toggle p-3 border-0 small text-white"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
+                  aria-label="Select country"
                 >
                   Australia
                 </button>
 
-                <ul className="dropdown-menu text-center">
+                <ul
+                  className="dropdown-menu text-center"
+                  aria-label="Country options"
+                >
                   <li>
-                    <button className="dropdown-item" type="button">
+                    <button
+                      className="dropdown-item"
+                      type="button"
+                      aria-label="Select Australia"
+                    >
                       Australia
                     </button>
                   </li>
                   <li>
-                    <button className="dropdown-item" type="button">
+                    <button
+                      className="dropdown-item"
+                      type="button"
+                      aria-label="Select Sri Lanka"
+                    >
                       Sri Lanka
                     </button>
                   </li>

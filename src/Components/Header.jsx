@@ -76,7 +76,7 @@ const Header = () => {
     message: "",
     type: "quote",
     submitted_at: "",
-    subject: "Quick Quote Request from Website"
+    subject: "Quick Quote Request from Website",
   });
   const [errors, setErrors] = useState({});
   const [generalError, setGeneralError] = useState("");
@@ -89,7 +89,7 @@ const Header = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     const updatedFormData = { ...formData, [name]: value };
     setFormData(updatedFormData);
 
@@ -97,17 +97,17 @@ const Header = () => {
     if (errors[name]) {
       setErrors({ ...errors, [name]: "" });
     }
-    
+
     // Clear general error when any field changes
     if (generalError) {
       setGeneralError("");
     }
-    
+
     // Clear captcha error when user types in message
     if (name === "message" && captchaError) {
       setCaptchaError("");
     }
-    
+
     // If form has been submitted, validate this field immediately
     if (isSubmitted) {
       const validationErrors = validate();
@@ -147,7 +147,7 @@ const Header = () => {
       newErrors.email = "Email is required";
     } else if (
       !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-        formData.email.trim()
+        formData.email.trim(),
       )
     ) {
       newErrors.email = "Enter a valid email address";
@@ -170,16 +170,16 @@ const Header = () => {
     setSent(false);
 
     // Prepare date for submission
-    const currentDate = new Date().toLocaleDateString('en-AU', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
+    const currentDate = new Date().toLocaleDateString("en-AU", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
     });
 
     // Update form data with current date
     const formDataWithDate = {
       ...formData,
-      submitted_at: currentDate
+      submitted_at: currentDate,
     };
 
     // First, validate all fields
@@ -202,14 +202,9 @@ const Header = () => {
       setIsSubmitting(false);
 
       // Check if any required fields are empty
-      const requiredFields = [
-        "firstName",
-        "mobile",
-        "email",
-        "message",
-      ];
+      const requiredFields = ["firstName", "mobile", "email", "message"];
       const hasEmptyRequiredFields = requiredFields.some(
-        (field) => !formData[field].trim()
+        (field) => !formData[field].trim(),
       );
 
       // Show general error if there are empty required fields or captcha is invalid
@@ -235,7 +230,7 @@ const Header = () => {
       message: formData.message,
       type: "quote",
       submitted_at: currentDate,
-      subject: "Quick Quote Request from Website"
+      subject: "Quick Quote Request from Website",
     };
 
     // If all validations pass
@@ -251,7 +246,7 @@ const Header = () => {
           console.log("Email sent successfully:", response);
           setIsSubmitting(false);
           setSent(true);
-          
+
           // Clear the form after successful submission
           setFormData({
             firstName: "",
@@ -261,15 +256,15 @@ const Header = () => {
             message: "",
             type: "quote",
             submitted_at: "",
-            subject: "Quick Quote Request from Website"
+            subject: "Quick Quote Request from Website",
           });
-          
+
           // Reset form state
           setErrors({});
           setCaptchaValue("");
           setShowCaptcha(false);
           setIsSubmitted(false);
-          
+
           // Auto close modal after 3 seconds
           setTimeout(() => {
             onClose();
@@ -279,9 +274,9 @@ const Header = () => {
           console.error("Email send error:", error.text);
           setIsSubmitting(false);
           setGeneralError(
-            "There was a problem sending the email. Please try again."
+            "There was a problem sending the email. Please try again.",
           );
-        }
+        },
       );
   };
 
@@ -307,7 +302,7 @@ const Header = () => {
       message: "",
       type: "quote",
       submitted_at: "",
-      subject: "Quick Quote Request from Website"
+      subject: "Quick Quote Request from Website",
     });
     setErrors({});
     setGeneralError("");
@@ -358,7 +353,7 @@ const Header = () => {
                     <Link
                       to="/"
                       className={`nav-link headernav-link cursor ${getNavLinkClass(
-                        "/"
+                        "/",
                       )}`}
                     >
                       Home
@@ -369,7 +364,7 @@ const Header = () => {
                     <Link
                       to="/about"
                       className={`nav-link headernav-link cursor ${getNavLinkClass(
-                        "/about"
+                        "/about",
                       )}`}
                     >
                       About Us
@@ -380,7 +375,7 @@ const Header = () => {
                     <Link
                       to="/services"
                       className={`nav-link headernav-link cursor ${getNavLinkClass(
-                        "/services"
+                        "/services",
                       )}`}
                     >
                       Services
@@ -391,7 +386,7 @@ const Header = () => {
                     <Link
                       to="/case-studies"
                       className={`nav-link headernav-link cursor ${getNavLinkClass(
-                        "/case-studies"
+                        "/case-studies",
                       )}`}
                     >
                       Case Studies
@@ -402,7 +397,7 @@ const Header = () => {
                     <Link
                       to="/contact-us"
                       className={`nav-link headernav-link cursor ${getNavLinkClass(
-                        "/contact-us"
+                        "/contact-us",
                       )}`}
                     >
                       Contact Us
@@ -419,6 +414,7 @@ const Header = () => {
                 data-bs-toggle="offcanvas"
                 data-bs-target="#mobileMenu"
                 aria-controls="mobileMenu"
+                aria-label="Open navigation menu"
                 onClick={handleToggleOffcanvas}
               >
                 <span className="navbar-toggler-icon"></span>
@@ -428,6 +424,7 @@ const Header = () => {
                 <ButtonGlobal
                   text="Get a quick quote"
                   onClick={() => setShowModal(true)}
+                  ariaLabel="Open quick quote form"
                 />
               </div>
             </div>
@@ -515,6 +512,8 @@ const Header = () => {
                   <ButtonGlobal
                     text="Get a quick quote"
                     onClick={handleMobileQuickQuote}
+                    ariaLabel="Open quick quote form"
+                    aria-haspopup="dialog"
                   />
                 </div>
               </li>
@@ -753,9 +752,12 @@ const Header = () => {
                           whileTap={{ scale: 0.97 }}
                         >
                           <ButtonGlobal
-                            text={isSubmitting ? "Sending..." : "Submit Message"}
+                            text={
+                              isSubmitting ? "Sending..." : "Submit Message"
+                            }
                             type="submit"
                             disabled={isSubmitting}
+                            ariaLabel="Submit contact form message"
                           />
                         </motion.div>
                       </div>

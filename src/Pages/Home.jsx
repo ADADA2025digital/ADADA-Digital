@@ -72,7 +72,7 @@ function Home() {
         {
           duration: isMobile ? 40000 : 80000,
           iterations: Infinity,
-        }
+        },
       );
     }
 
@@ -335,7 +335,11 @@ function Home() {
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 380, damping: 24 }}
             >
-              <ButtonGlobal text="Explore Now" to="/about" />
+              <ButtonGlobal
+                text="Explore Now"
+                to="/about"
+                ariaLabel="Go to the About page"
+              />
             </motion.div>
 
             {/* scroll indicator */}
