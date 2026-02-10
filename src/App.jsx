@@ -5,7 +5,12 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./assets/Styles/Style.css";
 
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
@@ -72,16 +77,17 @@ function AppContent() {
       <Header />
       <ScrollToTop />
 
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/case-studies" element={<Portfolio />} />
-          {/* <Route path="/blog" element={<Blog />} /> */}
-          <Route path="/contact-us" element={<Contact />} />
-        </Routes>
-      </div>
+      <main id="main-content" role="main">
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/case-studies" element={<Portfolio />} />
+            <Route path="/contact-us" element={<Contact />} />
+          </Routes>
+        </div>
+      </main>
 
       <Footer />
       <BackToTop />

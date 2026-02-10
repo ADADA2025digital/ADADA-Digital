@@ -560,6 +560,8 @@ const About = () => {
                     stiffness: 300,
                     damping: 20,
                   }}
+                  loading="lazy"
+                  decoding="async"
                 />
               ))}
             </motion.div>
@@ -572,6 +574,8 @@ const About = () => {
                     alt={`Client Logo ${index + 1}`}
                     key={`client-${index}`}
                     className="client-logo mx-5"
+                    loading="lazy"
+                    decoding="async"
                   />
                 ))}
               </div>

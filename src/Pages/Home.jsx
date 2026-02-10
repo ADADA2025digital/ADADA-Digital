@@ -491,6 +491,8 @@ function Home() {
                     alt={`Client Logo ${index + 1}`}
                     key={`client-${index}`}
                     className="client-logo mx-5"
+                    loading="lazy"
+                    decoding="async"
                   />
                 ))}
               </div>
